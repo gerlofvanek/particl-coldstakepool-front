@@ -1,5 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
+import { RpcService } from './rpc.service';
 
 @Component({
   selector: 'app-root',
@@ -11,100 +12,57 @@ export class AppComponent implements OnInit {
   public chart: Chart; 
   @ViewChild('chartElem') chartElem;
   
+  constructor(private rpc: RpcService) {
+    this.rpc.getConfig().subscribe(data => {
+      console.log(data)
+      this.config = data;
+    })
+
+    this.rpc.getJson().subscribe(data => {
+      this.api = data;
+    })
+  }
+
   public api: any = {
-    "pooladdress": "pcs14ch7w7ue2q8kadljsl42wehfw8tm99yxsez4kz",
+    "pooladdress": "...",
     "pendingpayments": [],
-    "poolfeestotal": 3586099,
+    "poolfeestotal": 0,
     "poolwithdrawntotal": 0,
     "poolmode": "master",
-    "poolrewardtotal": 236056657,
-    "poolheight": 322439,
+    "poolrewardtotal": 0,
+    "poolheight": 0,
     "lastblocks": [
-      [
-        321485,
-        "b86c19a908c83b5a311140d5959197ea70e37cfdd2f84d126ffc58f0e419943d",
-        125373550,
-        865655823208
-      ],
-      [
-        321357,
-        "770549f36c1487c427e5719ab1d5dc78dcb4245520614f50a4c3005b9452a9c9",
-        125371000,
-        865655823208
-      ],
-      [
-        320172,
-        "370d5a0490618abb3e7361e5ed7a9442855f3ae4bf866385f74db5bba13e161b",
-        125348480,
-        865655823208
-      ],
-      [
-        320129,
-        "df839f38be192a1cbff95cc85c09ad3d481e3f82dfed9d4881fc1e65bf9f382b",
-        125347620,
-        865655823208
-      ],
-      [
-        317646,
-        "69d903a805ed400cf722cad996fddbb35091394a1d5bdfb6702b2011ea1083ee",
-        125300290,
-        865655823208
-      ]
+
     ],
-    "blocksfound": 63,
-    "stakeweight": 865655823208,
-    "watchonlytotalbalance": 8656.55823208,
-    "lastpaymentrunheight": 322401,
+    "blocksfound": 0,
+    "stakeweight": 0,
+    "watchonlytotalbalance": 0,
+    "lastpaymentrunheight": 0,
     "lastpayments": [
-      [
-        321602,
-        "fb9ff3e5cf55f91a6527c2a5d3f0907a3ab5f1eee3ec779967a150c6c5510310",
-        146175356
-      ],
-      [
-        321502,
-        "532ac697fa507c193f860aea67bd113cbe60bebdf2e48103a315fd341a1ca56d",
-        117983906
-      ],
-      [
-        320302,
-        "f546e2deea4082dde406d0df150513564509d98737a7a71c57dcf050681aee10",
-        214079234
-      ],
-      [
-        317802,
-        "4355052337c72a3c8e80dd8567505212e6333cdee0fdeeb725d3f1dce27cb01f",
-        139822512
-      ],
-      [
-        317402,
-        "258f819c19b691d7fd743383dfb89265a55755cd63dd2a7a99548c2bf15f25e3",
-        117058808
-      ]
     ]
   };
 
   public config: any = {
-    "pooladdress": "pcs14ch7w7ue2q8kadljsl42wehfw8tm99yxsez4kz",
+    "pooladdress": "...",
     "parameters": [
       {
-        "minoutputvalue": 0.1,
+        "minoutputvalue": 0,
         "height": 0,
-        "minblocksbetweenpayments": 100,
-        "payoutthreshold": 0.5,
-        "stakebonuspercent": 5,
-        "poolfeepercent": 3
+        "minblocksbetweenpayments": 0,
+        "payoutthreshold": 0,
+        "stakebonuspercent": 0,
+        "poolfeepercent": 0
       }
     ],
-    "htmlport": 9000,
-    "startheight": 254000,
-    "zmqhost": "tcp://127.0.0.1",
-    "rewardaddress": "PbXgDsRurjpCYXxNryin13h86ufks9zh6o",
+    "htmlport": 0,
+    "startheight": 0,
+    "zmqhost": "...",
+    "rewardaddress": "...",
     "htmlhost": "localhost",
-    "particlbindir": "/home/stakepooluser/particlAlpha",
-    "mode": "master",
-    "particldatadir": "/home/stakepooluser/stakepoolDemoLive",
-    "zmqport": 207922,
+    "particlbindir": "...",
+    "mode": "...",
+    "particldatadir": "...",
+    "zmqport": 0,
     "debug": true
   };
 
