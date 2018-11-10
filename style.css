@@ -1,0 +1,947 @@
+/* ========================================================================
+	Fonts
+ ========================================================================== */
+
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  normal;
+  font-weight: 400;
+  src: url("fonts/Inter-UI-Regular.woff2?v=3.0") format("woff2"),
+       url("fonts/Inter-UI-Regular.woff?v=3.0") format("woff");
+}
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  italic;
+  font-weight: 400;
+  src: url("fonts/Inter-UI-Italic.woff2?v=3.0") format("woff2"),
+       url("fonts/Inter-UI-Italic.woff?v=3.0") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  normal;
+  font-weight: 500;
+  src: url("fonts/Inter-UI-Medium.woff2?v=3.0") format("woff2"),
+       url("fonts/Inter-UI-Medium.woff?v=3.0") format("woff");
+}
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  italic;
+  font-weight: 500;
+  src: url("fonts/Inter-UI-MediumItalic.woff2?v=3.0") format("woff2"),
+       url("fonts/Inter-UI-MediumItalic.woff?v=3.0") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  normal;
+  font-weight: 600;
+  src: url("fonts/Inter-UI-SemiBold.woff2?v=3.0") format("woff2"),
+       url("fonts/Inter-UI-SemiBold.woff?v=3.0") format("woff");
+}
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  italic;
+  font-weight: 600;
+  src: url("fonts/Inter-UI-SemiBoldItalic.woff2?v=3.0") format("woff2"),
+       url("fonts/Inter-UI-SemiBoldItalic.woff?v=3.0") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  normal;
+  font-weight: 700;
+  src: url("fonts/Inter-UI-Bold.woff2?v=3.0") format("woff2"),
+       url("fonts/Inter-UI-Bold.woff?v=3.0") format("woff");
+}
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  italic;
+  font-weight: 700;
+  src: url("fonts/Inter-UI-BoldItalic.woff2?v=3.0") format("woff2"),
+       url("fonts/Inter-UI-BoldItalic.woff?v=3.0") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  normal;
+  font-weight: 800;
+  src: url("fonts/Inter-UI-ExtraBold.woff2?v=3.0") format("woff2"),
+       url("fonts/Inter-UI-ExtraBold.woff?v=3.0") format("woff");
+}
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  italic;
+  font-weight: 800;
+  src: url("fonts/Inter-UI-ExtraBoldItalic.woff2?v=3.0") format("woff2"),
+       url("fonts/Inter-UI-ExtraBoldItalic.woff?v=3.0") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  normal;
+  font-weight: 900;
+  src: url("fonts/Inter-UI-Black.woff2?v=3.0") format("woff2"),
+       url("fonts/Inter-UI-Black.woff?v=3.0") format("woff");
+}
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  italic;
+  font-weight: 900;
+  src: url("fonts/Inter-UI-BlackItalic.woff2?v=3.0") format("woff2"),
+       url("fonts/Inter-UI-BlackItalic.woff?v=3.0") format("woff");
+}
+
+/* --------------------------------------------------------------------------
+Single variable font.
+
+Note that you may want to do something like this to make sure you're serving
+constant fonts to older browsers:
+html {
+  font-family: 'Inter UI', sans-serif;
+}
+@supports (font-variation-settings: normal) {
+  html {
+    font-family: 'Inter UI var', sans-serif;
+  }
+}
+
+BUGS:
+- Safari 12.0 will default to italic instead of regular when font-weight
+  is provided in a @font-face declaration.
+  Workaround: Use "Inter UI var alt" for Safari, or explicitly set
+  `font-variation-settings:"slnt" DEGREE`.
+*/
+@font-face {
+  font-family: 'Inter UI var';
+  font-weight: 400 900;
+  font-style: oblique 0deg 10deg;
+  src: url("fonts/Inter-UI.var.woff2?v=3.0") format("woff2-variations"),
+       url("fonts/Inter-UI.var.woff2?v=3.0") format("woff2");
+}
+
+/* --------------------------------------------------------------------------
+
+"Inter UI var alt" is recommended for Safari and Edge, for reliable italics.
+
+@supports (font-variation-settings: normal) {
+  html {
+    font-family: 'Inter UI var alt', sans-serif;
+  }
+}
+
+*/
+@font-face {
+  font-family: 'Inter UI var alt';
+  font-weight: 400 900;
+  font-style: normal;
+  font-named-instance: 'Regular';
+  src: url("fonts/Inter-UI-upright.var.woff2?v=3.0") format("woff2 supports variations(gvar)"),
+       url("fonts/Inter-UI-upright.var.woff2?v=3.0") format("woff2-variations"),
+       url("fonts/Inter-UI-upright.var.woff2?v=3.0") format("woff2");
+}
+@font-face {
+  font-family: 'Inter UI var alt';
+  font-weight: 400 900;
+  font-style: italic;
+  font-named-instance: 'Italic';
+  src: url("fonts/Inter-UI-italic.var.woff2?v=3.0") format("woff2 supports variations(gvar)"),
+       url("fonts/Inter-UI-italic.var.woff2?v=3.0") format("woff2-variations"),
+       url("fonts/Inter-UI-italic.var.woff2?v=3.0") format("woff2");
+}
+
+/* ========================================================================
+	Start
+ ========================================================================== */
+* {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+ 
+html {
+  font-family: 'Inter UI', sans-serif;
+    font-size: 16px;
+  font-weight: normal;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  background:#161B1B;
+  color: #666;
+}
+@supports (font-variation-settings: normal) {
+  html {
+    font-family: 'Inter UI var', sans-serif;
+  }
+}
+
+body {
+  font-size: 14px;
+  background: #161b1b;
+   color: #FAFAFA;
+}
+
+
+/* ========================================================================
+	Intro
+ ========================================================================== */
+
+.address-intro {
+font-family: Consolas,monaco,monospace;
+font-size: 1.3rem;
+white-space: nowrap;
+border: solid 1.5px #12afff;
+padding: 0.7rem 3.3rem 0.7rem 1.3rem;
+    margin: 0;
+    background: #080a0a;
+    border: none;
+    box-shadow: 0 1px #2d3737;
+    color: #FAFAFA;
+
+}
+
+@media only screen and (max-width: 30rem) {
+.address-intro {
+font-family: Consolas,monaco,monospace;
+font-size: 0.7rem;
+white-space: nowrap;
+border: solid 1.5px #12afff;
+padding: 0.7rem 0.4rem 0.7rem 0.4rem;
+    margin: 0;
+    background: #080a0a;
+    border: none;
+    box-shadow: 0 1px #2d3737;
+    color: #FAFAFA;
+
+}
+}
+
+@media only screen and (max-width: 60rem) {
+.address-intro {
+font-family: Consolas,monaco,monospace;
+font-size: 1rem;
+white-space: nowrap;
+border: solid 1.5px #12afff;
+padding: 0.7rem 0.4rem 0.7rem 0.4rem;
+    margin: 0;
+    background: #080a0a;
+    border: none;
+    box-shadow: 0 1px #2d3737;
+    color: #FAFAFA;
+}
+}
+
+.address-intro-blue {
+color: #12afff;	
+}
+
+.intro-details .item {
+    padding-top: 0.8rem;
+    padding-bottom: 0.6rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+	margin-top:25px;
+}
+.intro-details .item:hover {
+    background: #1b2121;
+}
+.intro-details .title a {
+    color: #fff;
+}
+.intro-details .version {
+    margin-right: 0.2rem;
+}
+.intro-details .updated {
+    font-size: 0.75rem;
+    color: #6D8484;
+    display: inline-block;
+}
+.intro-details .desc {
+    color: #FAFAFA;
+}
+.intro-details .section-desc {
+    margin-top: 0;
+}
+.intro-details .section-desc small {
+    color: #6D8484;
+}
+
+/* ========================================================================
+	Backgrounds sections
+ ========================================================================== */
+
+.intro {
+	background:#111;
+}
+
+.chart {
+	background:#111;
+	padding-top:30px;
+	padding-bottom:70px;
+}
+
+/* ========================================================================
+   Container
+ ========================================================================== */
+
+.container {
+  box-sizing: content-box;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 640px) {
+  .container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media (min-width: 960px) {
+  .container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+.container::before,
+.container::after {
+  content: "";
+  display: table;
+}
+.container::after {
+  clear: both;
+}
+.container > :last-child {
+  margin-bottom: 0;
+}
+.container .container {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+/* ========================================================================
+   Section
+ ========================================================================== */
+
+.section {
+  box-sizing: border-box;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+@media (min-width: 960px) {
+  .section {
+    padding-top: 170px;
+    padding-bottom: 70px;
+  }
+}
+.section::before,
+.section::after {
+  content: "";
+  display: table;
+}
+.section::after {
+  clear: both;
+}
+.section > :last-child {
+  margin-bottom: 0;
+}
+
+/* ========================================================================
+  Style modifiers
+ ========================================================================== */
+.text-lead {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  color: #fff;
+  padding-bottom:20px;
+}
+.text-meta {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #999;
+}
+.text-meta a {
+  color: #999;
+}
+.text-meta a:hover {
+  color: #666;
+  text-decoration: none;
+}
+
+/* ========================================================================
+  Alignment modifiers
+ ========================================================================== */
+.text-left {
+  text-align: left !important;
+}
+.text-right {
+  text-align: right !important;
+}
+.text-center {
+  text-align: center !important;
+}
+.text-justify {
+  text-align: justify !important;
+}
+
+/* ========================================================================
+	Logo
+ ========================================================================== */
+
+ .logo{
+    float:left;
+    margin-left:-0.8rem
+}
+@media only screen and (min-width: 768px){
+    .logo{
+        background:#111;
+        margin-right:0.8rem
+    }
+}
+.logo a{
+    display:block
+}
+.logo img{
+    display:block;
+    width:120%;
+    height:auto;
+    padding: 1.3rem 1.3rem;
+}
+
+/* ========================================================================
+  Other
+ ========================================================================== */
+ 
+hr {
+    border-color: rgba(45,55,55,0.5);
+    margin: 0;
+}
+a {
+    color: #04E8B0;
+}
+a:focus,
+a:hover {
+    color: #15fbc2;
+}
+
+.amount {
+    font-size: 1.35rem;
+    font-weight: 600;
+}
+@media only screen and (min-width: 30rem) {
+    .amount {
+        font-size: 1.55rem;
+    }
+}
+@media only screen and (min-width: 45rem) {
+    .amount {
+        font-size: 1.55rem;
+    }
+}
+
+.amount small {
+    margin-left: 0.25rem;
+    font-weight: 400;
+}
+section.column,
+section.columns {
+    padding: 1.5rem 1rem 0.5rem;
+}
+@media only screen and (min-width: 30rem) {
+    section.column,
+    section.columns {
+        padding: 1.5rem 1.5rem 0.5rem;
+    }
+}
+@media only screen and (min-width: 45rem) {
+    section.column,
+    section.columns {
+        padding: 3rem 2.5rem 2rem;
+    }
+}
+
+.item {
+    margin-bottom: 2.4rem;
+    position: relative;
+}
+.item .title {
+    font-size: 0.925rem;
+    font-weight: 500;
+    color: #6D8484;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem;
+}
+.item .title span {
+    text-transform: none;
+}
+
+.item .desc {
+    font-size: 0.825rem;
+    line-height: 1.5;
+    color: #6D8484;
+}
+.bold {
+	font-weight:bold;
+}
+
+/* ========================================================================
+  Icons
+ ========================================================================== */
+
+.icon {
+	color:#03E8B0;
+}
+
+.icon-blue {
+	color:#12afff;
+}
+
+@font-face {
+  font-family: 'Particl';
+  src: url('fonts/Particl.eot');
+  src: url('fonts/Particl.eot') format('embedded-opentype'), url('fonts/Particl.woff2') format('woff2'), url('fonts/Particl.woff') format('woff'), url('fonts/Particl.ttf') format('truetype'), url('fonts/Particl.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/*------------------------
+	base class definition
+-------------------------*/
+.icon {
+  display: inline-block;
+  font: normal normal normal 1em/1 'Particl';
+  speak: none;
+  text-transform: none;
+  /* Better Font Rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/*------------------------
+  change icon size
+-------------------------*/
+/* relative units */
+.icon-sm {
+  font-size: 0.8em;
+}
+.icon-lg {
+  font-size: 1.2em;
+}
+/* absolute units */
+.icon-16 {
+  font-size: 16px;
+}
+.icon-32 {
+  font-size: 32px;
+}
+/*----------------------------------
+  add a square/circle background
+-----------------------------------*/
+.icon-bg-square,
+.icon-bg-circle {
+  padding: 0.35em;
+  background-color: #eee;
+}
+.icon-bg-circle {
+  border-radius: 50%;
+}
+/*------------------------------------
+  use icons as list item markers
+-------------------------------------*/
+.icon-ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+.icon-ul > li {
+  display: flex;
+  align-items: flex-start;
+  line-height: 1.4;
+}
+.icon-ul > li > .icon {
+  margin-right: 0.4em;
+  line-height: inherit;
+}
+/*------------------------
+  spinning icons
+-------------------------*/
+.icon-is-spinning {
+  -webkit-animation: icon-spin 2s infinite linear;
+  -moz-animation: icon-spin 2s infinite linear;
+  animation: icon-spin 2s infinite linear;
+}
+@-webkit-keyframes icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes icon-spin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@keyframes icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+/*------------------------
+  rotated/flipped icons
+-------------------------*/
+.icon-rotate-90 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.icon-rotate-180 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.icon-rotate-270 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+.icon-flip-y {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
+  -webkit-transform: scale(-1, 1);
+  -moz-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  -o-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+.icon-flip-x {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: scale(1, -1);
+  -moz-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  -o-transform: scale(1, -1);
+  transform: scale(1, -1);
+}
+/*------------------------
+	icons
+-------------------------*/
+
+.icon-cog::before {
+  content: "\ea01";
+}
+
+.icon-grid-45::before {
+  content: "\ea02";
+}
+
+.icon-refresh-20::before {
+  content: "\ea03";
+}
+
+.icon-send::before {
+  content: "\ea05";
+}
+
+.icon-server-rack::before {
+  content: "\ea04";
+}
+
+.icon-shape-rectangle::before {
+  content: "\ea06";
+}
+
+.icon-snowflake::before {
+  content: "\ea07";
+}
+
+.icon-stake::before {
+  content: "\ea08";
+}
+
+.icon-time-clock::before {
+  content: "\ea09";
+}
+
+.icon-ui-03::before {
+  content: "\ea0a";
+}
+
+/* ========================================================================
+	Tables - tabs TODO (nobile-friendly /cleanup)
+ ========================================================================== */
+
+#detail-tabs {
+  margin: 0 auto;
+
+}
+
+.hide {
+  display: none;
+  padding: 20px 0 0;
+}
+
+input {
+  display: none;
+}
+
+label {
+  display: inline-block;
+  margin: 0 0 -1px;
+  padding: 15px 25px;
+  font-weight: 600;
+  text-align: center;
+  color: #6D8484;
+}
+
+label:before {
+  font-weight: normal;
+  margin-right: 10px;
+    font-family: 'Particl';
+}
+
+/*
+label[for*='1']:before { content: "\ea01"; }
+label[for*='2']:before { content: "\ea02"; }
+label[for*='3']:before { content: "\ea09"; }
+label[for*='4']:before { content: "\ea05"; }
+*/
+
+label:hover {
+  color: #789;
+  cursor: pointer;
+}
+
+input:checked + label {
+  color: #abc;
+  border-top: 2px solid #12afff;
+
+}
+
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3,
+#tab4:checked ~ #content4 {
+  display: block;
+}
+
+@media screen and (max-width: 800px) {
+  label {
+    font-size: 14px;
+  }
+  label:before {
+    margin: 0;
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  label {
+    padding: 15px;
+  }
+}
+
+table tr {
+    border-bottom: 1px solid rgba(45,55,55,0.7);
+
+}
+table tr:last-of-type {
+    border: none;
+}
+table tr:hover td,
+table tr:hover th {
+    background: rgba(45,55,55,0.7);
+}
+table.full-width {
+    width: 100%;
+}
+
+
+/* ========================================================================
+   Table
+ ========================================================================== */
+
+.table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  margin-bottom: 20px;
+}
+* + .table {
+  margin-top: 20px;
+}
+/* Header cell
+ ========================================================================== */
+.table th {
+  padding: 16px 12px;
+  text-align: left;
+  vertical-align: bottom;
+  font-size: 0.875rem;
+  font-weight: normal;
+  color: #999;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(45,55,55,0.7);
+}
+/* Cell
+ ========================================================================== */
+.table td {
+  padding: 16px 12px;
+  vertical-align: top;
+}
+/*
+ * Remove margin from the last-child
+ */
+.table td > :last-child {
+  margin-bottom: 0;
+}
+/* Footer
+ ========================================================================== */
+.table tfoot {
+  font-size: 0.875rem;
+}
+/* Caption
+ ========================================================================== */
+.table caption {
+  font-size: 0.875rem;
+  text-align: left;
+  color: #999;
+}
+/* Alignment modifier
+ ========================================================================== */
+.table-middle,
+.table-middle td {
+  vertical-align: middle !important;
+}
+/* Style modifiers
+ ========================================================================== */
+/*
+ * Divider
+ */
+.table-divider > tr:not(:first-child),
+.table-divider > :not(:first-child) > tr,
+.table-divider > :first-child > tr:not(:first-child) {
+  border-top: 1px solid #e5e5e5;
+}
+/*
+ * Striped
+ */
+.table-striped > tr:nth-of-type(odd),
+.table-striped tbody tr:nth-of-type(odd) {
+  background: #f8f8f8;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+}
+/*
+ * Hover
+ */
+.table-hover > tr:hover,
+.table-hover tbody tr:hover {
+  background: #111111;
+}
+/* Active state
+ ========================================================================== */
+.table > tr.active,
+.table tbody tr.active {
+  background: #111111;
+}
+/* Size modifier
+ ========================================================================== */
+.table-small th,
+.table-small td {
+  padding: 10px 12px;
+}
+.table-large th,
+.table-large td {
+  padding: 22px 12px;
+}
+/* Justify modifier
+ ========================================================================== */
+.table-justify th:first-child,
+.table-justify td:first-child {
+  padding-left: 0;
+}
+.table-justify th:last-child,
+.table-justify td:last-child {
+  padding-right: 0;
+}
+/* Cell size modifier
+ ========================================================================== */
+.table-shrink {
+  width: 1px;
+}
+.table-expand {
+  min-width: 150px;
+}
+/* Cell link modifier
+ ========================================================================== */
+.table-link {
+  padding: 0 !important;
+}
+.table-link > a {
+  display: block;
+  padding: 16px 12px;
+}
+.table-small .table-link > a {
+  padding: 10px 12px;
+}
+
+/* Responsive table
+ ========================================================================== */
+/* Phone landscape and smaller */
+@media (max-width: 959px) {
+  .table-responsive,
+  .table-responsive tbody,
+  .table-responsive th,
+  .table-responsive td,
+  .table-responsive tr {
+    display: block;
+  }
+  .table-responsive thead {
+    display: none;
+  }
+  .table-responsive th,
+  .table-responsive td {
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+    white-space: normal !important;
+  }
+  .table-responsive th:not(:first-child):not(.table-link),
+  .table-responsive td:not(:first-child):not(.table-link),
+  .table-responsive .table-link:not(:first-child) > a {
+    padding-top: 5px !important;
+  }
+  .table-responsive th:not(:last-child):not(.table-link),
+  .table-responsive td:not(:last-child):not(.table-link),
+  .table-responsive .table-link:not(:last-child) > a {
+    padding-bottom: 5px !important;
+  }
+  .table-justify.table-responsive th,
+  .table-justify.table-responsive td {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+.table tbody tr {
+  transition: background-color 0.1s linear;
+}
