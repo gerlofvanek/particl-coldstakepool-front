@@ -9,9 +9,9 @@ import { RpcService } from './rpc.service';
 })
 export class AppComponent implements OnInit {
 
-  public chart: Chart; 
+  public chart: Chart;
   @ViewChild('chartElem') chartElem;
-  
+
   constructor(private rpc: RpcService) {
     this.rpc.getConfig().subscribe(data => {
       console.log(data)
@@ -66,16 +66,25 @@ export class AppComponent implements OnInit {
     "debug": true
   };
 
+  private metrics: any = {
+    "latestblocks": [
+      ["2018-11", 6, 865655823208],
+      ["2018-10", 29, 664172712947],
+      ["2018-09", 16, 491999936600],
+      ["2018-08", 12, 366166666666]
+    ].reverse()
+  }
   ngOnInit() {
     this.updateChart();
   }
 
   updateChart(): void {
+    const metrics = this.getHumanReadableMetrics(this.metrics.latestblocks);
     let ctx = this.chartElem.nativeElement.getContext('2d');
     this.chart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        labels: this.getLabelsForMetrics(metrics),
         datasets: [{
           label: "Total pooled coins",
           backgroundColor: 'rgb(17, 17, 17,2)',
@@ -84,39 +93,13 @@ export class AppComponent implements OnInit {
           pointBorderWidth: 5,
           pointBackgroundColor: 'rgba(250, 250, 250,2)',
           pointBorderColor: 'rgba(250, 250, 250,2)',
-          data: [
-            2000,
-            5000,
-            1000,
-            190,
-            900,
-            2000,
-            1200,
-            1600,
-            900,
-            2000,
-            1200,
-            3600,
-          ],
+          data: this.getTotalCoinsForMetrics(metrics),
         }, {
           fill: 'origin',
           label: "Total blocks found",
           backgroundColor: 'rgb(3, 232, 176,2)',
           borderColor: 'rgba(0, 170, 255,2)',
-          data: [
-            2,
-            5,
-            10,
-            19,
-            9,
-            20,
-            12,
-            16,
-            9,
-            20,
-            12,
-            16,
-          ],
+          data: this.getBlocksForMetrics(metrics),
         }]
       },
       options: {
@@ -173,5 +156,29 @@ export class AppComponent implements OnInit {
     });
   }
 
+
+  getHumanReadableMetrics(metric: any) {
+    const monthNames = ["Padding", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    return metric.map(record => {
+
+      // 2018-11 -> 11 -> November
+      let month = monthNames[+record[0].split("-")[1]]
+
+      const total_coins = (record[2] / 100000000).toFixed(3) 
+      return [month, record[1], total_coins]
+    })
+  }
+
+  getLabelsForMetrics(hrMetrics: any) {
+    return hrMetrics.map(record => record[0])
+  }
+
+  getBlocksForMetrics(hrMetrics: any) {
+    return hrMetrics.map(record => record[1])
+  }
+
+  getTotalCoinsForMetrics(hrMetrics: any) {
+    return hrMetrics.map(record => record[2])
+  }
 
 }

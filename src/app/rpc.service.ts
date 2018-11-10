@@ -5,15 +5,20 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class RpcService {
+  private customUrl: string = "http://144.202.17.55"
+  private testnet: boolean = true;
 
-  constructor(private http: HttpClient) {}
- 
+  constructor(private http: HttpClient) { }
+
+  get url(): string {
+    return `${this.customUrl}/${this.testnet ? "/test" : ""}`;
+  }
   // Uses http.get() to load data from a single API endpoint
   getConfig() {
-      return this.http.get('http://66.172.10.231:900/config');
+    return this.http.get(`${this.url}/config`);
   }
 
   getJson() {
-    return this.http.get('http://66.172.10.231:900/json/');
-}
+    return this.http.get(`${this.url}/json`);
+  }
 }
