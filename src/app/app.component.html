@@ -1,0 +1,241 @@
+
+<!-- intro todo (GFX logo/background, Github button) -->
+<section class="intro">
+
+  <div class="container">
+      <div class="logo">
+          <a href="/"><img src="assets/img/particl-logotype.svg" alt="Particl.io"></a>
+      </div>
+      <div class="section text-center">
+          <p class="text-lead">Particl Proof-of-Concept Cold Stake Pool</p>
+
+          <span class="address-intro">Pool Address: <span class="address-intro-blue">{{ config.pooladdress }}</span></span>
+
+          <section class="intro-details columns" style="padding-bottom:0px;">
+
+              <div class="small-block-grid-2 medium-block-grid-5 large-block-grid-5">
+
+                  <div class="item">
+                      <h3 class="title">Users connected</h3>
+                      <div class="amount ">{{ api.connections || 0 }}</div>
+                      <p class="desc ">based on payment addresses</p>
+                  </div>
+
+                  <div class="item">
+                      <h3 class="title">Synced Height</h3>
+                      <div class="amount ">{{ api.poolheight }}</div>
+                      <p class="desc ">text here...</p>
+                  </div>
+
+                  <div class="item">
+                      <h3 class="title">Total Pooled Coins</h3>
+                      <div class="amount ">{{ api.watchonlytotalbalance.toFixed(3) }}<small class="hide-for-s">PART</small></div>
+                      <p class="desc ">text here...</p>
+                  </div>
+
+                  <div class="item">
+                      <h3 class="title">Currently Staking</h3>
+                      <div class="amount ">{{ api.stakedbalance }}<small class="hide-for-s">PART</small></div>
+                      <p class="desc ">text here...</p>
+                  </div>
+
+                  <div class="item">
+                      <h3 class="title">Blocks Found</h3>
+                      <div class="amount">{{ api.blocksfound }}</div>
+                      <p class="desc ">text here...</p>
+                  </div>
+
+              </div>
+
+          </section>
+
+      </div>
+  </div>
+</section>
+<!-- intro end -->
+<hr>
+<section class="chart">
+
+  <div class="container">
+      <canvas #chartElem id="chart-particl" width="400" height="125"></canvas>
+
+  </div>
+</section>
+<!-- intro end -->
+
+<hr>
+
+<!-- table (todo: fix table mobile-friendly / icons -->
+<div class="container">
+
+  <div id="detail-tabs">
+      <input id="tab1" type="radio" name="tabs" checked>
+      <label for="tab1">POOL SETTINGS</label>
+
+      <input id="tab2" type="radio" name="tabs">
+      <label for="tab2">RECENT BLOCKS</label>
+
+      <input id="tab3" type="radio" name="tabs">
+      <label for="tab3">PENDING PAYMENTS</label>
+
+      <input id="tab4" type="radio" name="tabs">
+      <label for="tab4">LAST PAYMENTS</label>
+
+      <div class="hide" id="content1">
+          <table class="table table-responsive text-left">
+              <thead>
+
+                  <tr>
+                      <th>SETTINGS</th>
+                      <th></th>
+                      <th>CONFIG</th>
+                  </tr>
+
+              </thead>
+              <tbody>
+                  <tr>
+                      <td class="table-shrink"><i class="icon icon-server-rack"></i></td>
+                      <td><b>Mode</b></td>
+                      <td><span class="text-meta">{{config.mode}}</span></td>
+                  </tr>
+                  <tr>
+                      <td><i class="icon icon-snowflake icon-blue"></i></td>
+                      <td><b>Pool Address</b></td>
+                      <td style="text-align:left"><span class="text-meta address">{{config.pooladdress}}</span></td>
+                  </tr>
+                  <tr>
+                      <td><i class="icon icon-cog"></i></td>
+                      <td><b>Pool Fee</b></td>
+                      <td style="text-align:left"><span class="text-meta">{{config.parameters[0].poolfeepercent}}%</span></td>
+                  </tr>
+                  <tr>
+                      <td><i class="icon icon-cog"></i></td>
+                      <td><b>Stake Bonus</b></td>
+                      <td style="text-align:left"><span class="text-meta">{{config.parameters[0].stakebonuspercent}}%</span></td>
+                  </tr>
+                  <tr>
+                      <td><i class="icon icon-cog"></i></td>
+                      <td><b>Payout Treshhold</b></td>
+                      <td style="text-align:left"><span class="text-meta">{{config.parameters[0].payoutthreshold}} PART</span></td>
+                  </tr>
+                  <tr>
+                      <td><i class="icon icon-grid-45"></i></td>
+                      <td><b>Blocks Between Payment Runs</b></td>
+                      <td style="text-align:left"><span class="text-meta">{{config.parameters[0].minblocksbetweenpayments}} blocks</span></td>
+                  </tr>
+                  <tr>
+                      <td><i class="icon icon-cog"></i></td>
+                      <td><b>Minimum output value</b></td>
+                      <td style="text-align:left"><span class="text-meta">{{config.parameters[0].minoutputvalue}} PART</span></td>
+                  </tr>
+
+                  <tr>
+                      <td><i class="icon icon-refresh-20"></i></td>
+                      <td><b>Synced Height</b></td>
+                      <td style="text-align:left"><span class="text-meta">{{api.poolheight}}</span></td>
+                  </tr>
+                  <tr>
+                      <td><i class="icon icon-grid-45"></i></td>
+                      <td><b>Blocks Found</b></td>
+                      <td style="text-align:left"><span class="text-meta">{{api.blocksfound}}</span></td>
+                  </tr>
+                  <tr>
+                      <td><i class="icon icon-time-clock"></i></td>
+                      <td><b>Last Payment Run</b></td>
+                      <td style="text-align:left"><span class="text-meta">{{api.lastpaymentrunheight}}</span></td>
+                  </tr>
+
+                  <tr>
+                      <td><i class="icon icon-stake"></i></td>
+                      <td><b>Total Pool Rewards</b></td>
+                      <td style="text-align:left"><span class="text-meta">{{api.poolrewardtotal}}</span></td>
+                  </tr>
+                  <tr>
+                      <td><i class="icon icon-stake"></i></td>
+                      <td><b>Total Pool Fees</b></td>
+                      <td style="text-align:left"><span class="text-meta">{{api.poolfeestotal}}</span></td>
+                  </tr>
+                  <tr>
+                      <td><i class="icon icon-send"></i></td>
+                      <td><b>Total Pool Rewards Withdrawn</b></td>
+                      <td style="text-align:left"><span class="text-meta">{{api.poolwithdrawntotal}}</span></td>
+                  </tr>
+
+                  <tr>
+                      <td><i class="icon icon-stake"></i></td>
+                      <td><b>Total Pooled Coins</b></td>
+                      <td style="text-align:left"><span class="text-meta">{{api.watchonlytotalbalance}}</span></td>
+                  </tr>
+                  <tr>
+                      <td><i class="icon icon-stake"></i></td>
+                      <td><b>Currently Staking</b></td>
+                      <td style="text-align:left"><span class="text-meta">{{api.stakedbalance}}</span></td>
+                  </tr>
+
+              </tbody>
+          </table>
+      </div>
+
+      <div class="hide" id="content2">
+          <table class="table table-responsive text-left">
+              <thead>
+                  <tr>
+                      <th>Height</th>
+                      <th>Block Hash</th>
+                      <th>Block Reward</th>
+                      <th>Total Coin Staking</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let block of api.lastblocks">
+                      <td><b>{{block[0] }}</b></td>
+                      <td>{{ block[1] }}</td>
+                      <td>{{ (block[2] / 100000000).toFixed(8) }}</td>
+                      <td>{{ (block[3] / 100000000).toFixed(8) }}</td>
+                  </tr>
+
+
+              </tbody>
+          </table>
+
+      </div>
+
+      <div class="hide" id="content3">
+          <table class="table table-responsive text-left">
+              <thead>
+                  <tr>
+                      <th>Txid</th>
+                      <th>Disbursed</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let payment of api.pendingpayments">
+                      <td>{{ payment[1] }}</td>
+                      <td>{{ (payment[2] / 100000000).toFixed(8) }}</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+
+      <div class="hide" id="content4">
+          <table class="table table-responsive text-left">
+              <thead>
+                  <tr>
+                      <th>Height</th>
+                      <th>Txid</th>
+                      <th>Disbursed</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let payment of api.lastpayments">
+                      <td><b>{{ payment[0] }}</b></td>
+                      <td>{{ payment[1] }}</td>
+                      <td>{{ (payment[2] / 100000000).toFixed(8) }}</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+
+</div>
+<!-- content end -->
