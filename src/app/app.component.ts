@@ -21,6 +21,11 @@ export class AppComponent implements OnInit {
     this.rpc.getJson().subscribe(data => {
       this.api = data;
     });
+
+    this.rpc.getMetrics().subscribe((data: any) => {
+      this.metrics = data.reverse();
+      this.updateChart();
+    });
   }
 
   public api: any = {
@@ -36,6 +41,8 @@ export class AppComponent implements OnInit {
     ],
     'blocksfound': 0,
     'stakeweight': 0,
+    'stakedbalance': 0,
+    'connections': 0,
     'watchonlytotalbalance': 0,
     'lastpaymentrunheight': 0,
     'lastpayments': [
@@ -66,20 +73,15 @@ export class AppComponent implements OnInit {
     'debug': true
   };
 
-  private metrics: any = {
-    'latestblocks': [
-      ['2018-11', 6, 865655823208],
-      ['2018-10', 29, 664172712947],
-      ['2018-09', 16, 491999936600],
-      ['2018-08', 12, 366166666666]
-    ].reverse()
-  };
+  private metrics: any = [
+    ];
+
   ngOnInit() {
     this.updateChart();
   }
 
   updateChart(): void {
-    const metrics = this.getHumanReadableMetrics(this.metrics.latestblocks);
+    const metrics = this.getHumanReadableMetrics(this.metrics);
     const ctx = this.chartElem.nativeElement.getContext('2d');
     this.chart = new Chart(ctx, {
       type: 'line',

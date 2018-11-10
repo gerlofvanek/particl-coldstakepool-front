@@ -17,7 +17,7 @@
 
                   <div class="item">
                       <h3 class="title">Users connected</h3>
-                      <div class="amount ">{{ users_connected }}</div>
+                      <div class="amount ">{{ api.connections || 0 }}</div>
                       <p class="desc ">based on payment addresses</p>
                   </div>
 
@@ -35,7 +35,7 @@
 
                   <div class="item">
                       <h3 class="title">Currently Staking</h3>
-                      <div class="amount ">{{ currently_staked }}<small class="hide-for-s">PART</small></div>
+                      <div class="amount ">{{ api.stakedbalance }}<small class="hide-for-s">PART</small></div>
                       <p class="desc ">text here...</p>
                   </div>
 
@@ -169,7 +169,7 @@
                   <tr>
                       <td><i class="icon icon-stake"></i></td>
                       <td><b>Currently Staking</b></td>
-                      <td style="text-align:left"><span class="text-meta">3720.00000000</span></td>
+                      <td style="text-align:left"><span class="text-meta">{{api.stakedbalance}}</span></td>
                   </tr>
 
               </tbody>
