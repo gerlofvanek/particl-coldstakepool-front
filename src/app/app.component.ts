@@ -40,7 +40,11 @@ export class AppComponent implements OnInit {
 
     this.rpc.getMetrics().subscribe((data: any) => {
       this.metrics = data.reverse();
-      this.updateChart();
+      const metrics = this.getHumanReadableMetrics(this.metrics);
+      this.chart.data.labels = this.getLabelsForMetrics(metrics);
+      this.chart.data.datasets[0].data = this.getTotalCoinsForMetrics(metrics);
+      this.chart.data.datasets[1].data = this.getBlocksForMetrics(metrics);
+      this.chart.update();
     });
   }
 
@@ -94,16 +98,19 @@ export class AppComponent implements OnInit {
     ];
 
   ngOnInit() {
-    this.updateChart();
+    this.createChart();
   }
 
-  updateChart(): void {
-    const metrics = this.getHumanReadableMetrics(this.metrics);
+  /**
+   * TODO: don't rewrite the charts o nevery update, rather just update the data as a global variable
+   * It's rather slow currently
+   */
+  createChart(): void {
     const ctx = this.chartElem.nativeElement.getContext('2d');
     this.chart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: this.getLabelsForMetrics(metrics),
+        labels: [],
         datasets: [{
           label: 'Total pooled coins',
           backgroundColor: 'rgb(17, 17, 17,2)',
@@ -112,13 +119,13 @@ export class AppComponent implements OnInit {
           pointBorderWidth: 5,
           pointBackgroundColor: 'rgba(250, 250, 250,2)',
           pointBorderColor: 'rgba(250, 250, 250,2)',
-          data: this.getTotalCoinsForMetrics(metrics),
+          data: [],
         }, {
           fill: 'origin',
           label: 'Total blocks found',
           backgroundColor: 'rgb(3, 232, 176,2)',
           borderColor: 'rgba(0, 170, 255,2)',
-          data: this.getBlocksForMetrics(metrics),
+          data: [],
         }]
       },
       options: {
