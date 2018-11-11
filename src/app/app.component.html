@@ -22,25 +22,25 @@
 
                     <div class="item">
                         <h3 class="title">Synced Height</h3>
-                        <div class="amount ">{{ api.poolheight }}</div>
+                        <div class="amount ">{{ api.poolheight | number }}</div>
                         <p class="desc ">text here...</p>
                     </div>
 
                     <div class="item">
                         <h3 class="title">Total Pooled Coins</h3>
-                        <div class="amount ">{{ api.watchonlytotalbalance.toFixed(3) }}<small class="hide-for-s">PART</small></div>
+                        <div class="amount ">{{ api.watchonlytotalbalance.toFixed(3) | number  }}<small class="hide-for-s">PART</small></div>
                         <p class="desc ">text here...</p>
                     </div>
 
                     <div class="item">
                         <h3 class="title">Currently Staking</h3>
-                        <div class="amount ">{{ api.stakedbalance }}<small class="hide-for-s">PART</small></div>
+                        <div class="amount ">{{ api.stakedbalance | number }}<small class="hide-for-s">PART</small></div>
                         <p class="desc ">text here...</p>
                     </div>
 
                     <div class="item">
                         <h3 class="title">Blocks Found</h3>
-                        <div class="amount">{{ api.blocksfound }}</div>
+                        <div class="amount">{{ api.blocksfound | number }}</div>
                         <p class="desc ">text here...</p>
                     </div>
 
@@ -137,44 +137,44 @@
                         <tr>
                             <td><i class="icon icon-refresh-20"></i></td>
                             <td><b>Synced Height</b></td>
-                            <td style="text-align:left"><span class="text-meta">{{api.poolheight}}</span></td>
+                            <td style="text-align:left"><span class="text-meta">{{api.poolheight | number}}</span></td>
                         </tr>
                         <tr>
                             <td><i class="icon icon-grid-45"></i></td>
                             <td><b>Blocks Found</b></td>
-                            <td style="text-align:left"><span class="text-meta">{{api.blocksfound}}</span></td>
+                            <td style="text-align:left"><span class="text-meta">{{api.blocksfound | number}}</span></td>
                         </tr>
                         <tr>
                             <td><i class="icon icon-time-clock"></i></td>
                             <td><b>Last Payment Run</b></td>
-                            <td style="text-align:left"><span class="text-meta">{{api.lastpaymentrunheight}}</span></td>
+                            <td style="text-align:left"><span class="text-meta">{{api.lastpaymentrunheight | number}}</span></td>
                         </tr>
 
                         <tr>
                             <td><i class="icon icon-stake"></i></td>
                             <td><b>Total Pool Rewards</b></td>
-                            <td style="text-align:left"><span class="text-meta">{{(api.poolrewardtotal / 100000000).toFixed(8)}}</span></td>
+                            <td style="text-align:left"><span class="text-meta">{{(api.poolrewardtotal / 100000000)  | number:'0.8'}}</span></td>
                         </tr>
                         <tr>
                             <td><i class="icon icon-stake"></i></td>
                             <td><b>Total Pool Fees</b></td>
-                            <td style="text-align:left"><span class="text-meta">{{(api.poolfeestotal/ 100000000).toFixed(8)}}</span></td>
+                            <td style="text-align:left"><span class="text-meta">{{(api.poolfeestotal/ 100000000)  | number:'0.8'}}</span></td>
                         </tr>
                         <tr>
                             <td><i class="icon icon-send"></i></td>
                             <td><b>Total Pool Rewards Withdrawn</b></td>
-                            <td style="text-align:left"><span class="text-meta">{{(api.poolwithdrawntotal/ 100000000).toFixed(8)}}</span></td>
+                            <td style="text-align:left"><span class="text-meta">{{(api.poolwithdrawntotal/ 100000000)  | number:'0.8'}}</span></td>
                         </tr>
 
                         <tr>
                             <td><i class="icon icon-stake"></i></td>
                             <td><b>Total Pooled Coins</b></td>
-                            <td style="text-align:left"><span class="text-meta">{{api.watchonlytotalbalance}}</span></td>
+                            <td style="text-align:left"><span class="text-meta">{{api.watchonlytotalbalance  | number}}</span></td>
                         </tr>
                         <tr>
                             <td><i class="icon icon-stake"></i></td>
                             <td><b>Currently Staking</b></td>
-                            <td style="text-align:left"><span class="text-meta">{{api.stakedbalance}}</span></td>
+                            <td style="text-align:left"><span class="text-meta">{{api.stakedbalance | number}}</span></td>
                         </tr>
 
                     </tbody>
