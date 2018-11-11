@@ -215,8 +215,8 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let payment of api.pendingpayments">
-                            <td>{{ payment[1] }}</td>
-                            <td>{{ (payment[2] / 100000000).toFixed(8) }}</td>
+                            <td>{{ payment[0] }}</td>
+                            <td>{{ (payment[1] / 100000000).toFixed(8) }}</td>
                         </tr>
                     </tbody>
                 </table>
