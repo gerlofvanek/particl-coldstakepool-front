@@ -153,17 +153,17 @@
                         <tr>
                             <td><i class="icon icon-stake"></i></td>
                             <td><b>Total Pool Rewards</b></td>
-                            <td style="text-align:left"><span class="text-meta">{{api.poolrewardtotal}}</span></td>
+                            <td style="text-align:left"><span class="text-meta">{{(api.poolrewardtotal / 100000000).toFixed(8)}}</span></td>
                         </tr>
                         <tr>
                             <td><i class="icon icon-stake"></i></td>
                             <td><b>Total Pool Fees</b></td>
-                            <td style="text-align:left"><span class="text-meta">{{api.poolfeestotal}}</span></td>
+                            <td style="text-align:left"><span class="text-meta">{{(api.poolfeestotal/ 100000000).toFixed(8)}}</span></td>
                         </tr>
                         <tr>
                             <td><i class="icon icon-send"></i></td>
                             <td><b>Total Pool Rewards Withdrawn</b></td>
-                            <td style="text-align:left"><span class="text-meta">{{api.poolwithdrawntotal}}</span></td>
+                            <td style="text-align:left"><span class="text-meta">{{(api.poolwithdrawntotal/ 100000000).toFixed(8)}}</span></td>
                         </tr>
 
                         <tr>
