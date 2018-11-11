@@ -1,6 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { RpcService } from './rpc.service';
+import { interval, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +10,25 @@ import { RpcService } from './rpc.service';
 })
 export class AppComponent implements OnInit {
 
+  // Update timer
+  private timer: Observable<number>;
+  private seconds: number = 60 * 1000;
+
+  // Total coins and block chart
   public chart: Chart;
   @ViewChild('chartElem') chartElem;
 
   constructor(private rpc: RpcService) {
+    this.update();
+
+    // Periodically update the information displayed on the page
+    this.timer = interval(this.seconds);
+    this.timer.subscribe((t) => {
+      this.update()
+    });
+  }
+
+  update(): void {
     this.rpc.getConfig().subscribe(data => {
       console.log(data);
       this.config = data;
@@ -27,6 +43,7 @@ export class AppComponent implements OnInit {
       this.updateChart();
     });
   }
+
 
   public api: any = {
     'pooladdress': '...',
@@ -159,6 +176,11 @@ export class AppComponent implements OnInit {
   }
 
 
+  /**
+   * Takes the metrics provided by the pool page and formats them to a more
+   * human readable format and fit for usage in charts.
+   * @param metric 
+   */
   getHumanReadableMetrics(metric: any) {
     const m = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     return metric.map(record => {
