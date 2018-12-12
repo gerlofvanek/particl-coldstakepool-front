@@ -294,7 +294,7 @@
   
   .chart {
       background:#111;
-      padding-top:30px;
+      padding-top:70px;
       padding-bottom:70px;
 
 
@@ -455,7 +455,7 @@
    ========================================================================== */
    
   hr {
-      border-color: #1e2323;
+      border: 1px solid #1E2323;
       margin: 0;
   }
   a {
