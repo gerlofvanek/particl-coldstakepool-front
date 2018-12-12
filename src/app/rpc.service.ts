@@ -10,7 +10,8 @@ export class RpcService {
   constructor(private http: HttpClient) { }
 
   get url(): string {
-    return `${environment.url}${environment.testnet ? '/api/test' : '/api'}`;
+    return `${environment.url}`;
+  // return `${environment.url}${environment.testnet ? '/api/test' : '/api'}`;
   }
   // Uses http.get() to load data from a single API endpoint
   getConfig() {

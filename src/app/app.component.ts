@@ -107,24 +107,22 @@ export class AppComponent implements OnInit {
    */
   createChart(): void {
     const ctx = this.chartElem.nativeElement.getContext('2d');
+	
     this.chart = new Chart(ctx, {
       type: 'line',
       data: {
         labels: [],
         datasets: [{
           label: 'Total pooled coins',
-          backgroundColor: 'rgb(17, 17, 17,2)',
           borderColor: 'rgb(3, 232, 176,2)',
-          borderWidth: 3,
-          pointBorderWidth: 5,
-          pointBackgroundColor: 'rgba(250, 250, 250,2)',
+          borderWidth: 2,
+          pointBorderWidth: 4,
+          pointBackgroundColor: 'rgb(34, 41, 41,2)',
           pointBorderColor: 'rgba(250, 250, 250,2)',
           data: [],
         }, {
           fill: 'origin',
           label: 'Total blocks found',
-          backgroundColor: 'rgb(3, 232, 176,2)',
-          borderColor: 'rgba(0, 170, 255,2)',
           data: [],
         }]
       },
@@ -136,6 +134,7 @@ export class AppComponent implements OnInit {
         },
         tooltips: {
           mode: 'index',
+		  displayColors: false
         },
         hover: {
           mode: 'index'
@@ -149,10 +148,12 @@ export class AppComponent implements OnInit {
             scaleLabel: {
               display: false,
               labelString: ''
+			  
             },
             gridLines: {
-              display: false,
-
+              display: true,
+			  color: 'rgb(34, 41, 41,2)',
+              lineWidth: 0.5
             },
             ticks: {
               fontColor: '#CCC',
@@ -167,8 +168,7 @@ export class AppComponent implements OnInit {
               labelString: ''
             },
             gridLines: {
-              display: false,
-
+              display: false
             },
             ticks: {
               fontColor: '#CCC',

@@ -161,11 +161,10 @@
    
   html {
     font-family: 'Inter UI', sans-serif;
-      font-size: 16px;
     font-weight: normal;
     line-height: 1.5;
     -webkit-text-size-adjust: 100%;
-    background:#161B1B;
+
     color: #666;
   }
   @supports (font-variation-settings: normal) {
@@ -175,15 +174,34 @@
   }
   
   body {
-    font-size: 14px;
-    background: #161b1b;
-     color: #FAFAFA;
+
+    background: #0E0E0E;
+     color: #fff;
+
+	    font-size: 13px;
   }
   
   
   /* ========================================================================
       Intro
    ========================================================================== */
+  
+  .item.pool-address .address-string {
+
+    font-family: "Rajdhani_",sans-serif;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: 500;
+    word-break: break-all;
+    padding: 0.5rem 1rem;
+    margin: 0.6rem 0;
+      background: #080a0a;
+      border: none;
+      box-shadow: 0 1px #2d3737;
+  color: #12afff;	
+
+}
   
   .address-intro {
   font-family: Consolas,monaco,monospace;
@@ -231,7 +249,7 @@
   }
   
   .address-intro-blue {
-  color: #12afff;	
+      color: #FAFAFA;
   }
   
   .intro-details .item {
@@ -242,8 +260,8 @@
       margin-top:25px;
   }
   .intro-details .item:hover {
-      background: #1b2121;
   }
+  
   .intro-details .title a {
       color: #fff;
   }
@@ -270,14 +288,40 @@
    ========================================================================== */
   
   .intro {
-      background:#111;
+
+	  background: #111;
   }
   
   .chart {
       background:#111;
       padding-top:30px;
       padding-bottom:70px;
+
+
+
   }
+  
+  .cold-staking-logo {
+
+    width: 300px;
+    height: 311px;
+    display: block;
+    margin: 0 auto;
+
+}
+
+.blue {color:#12AFFF;}
+
+.white {color:#fff;}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
   
   /* ========================================================================
      Container
@@ -326,13 +370,10 @@
   
   .section {
     box-sizing: border-box;
-    padding-top: 40px;
-    padding-bottom: 40px;
   }
   @media (min-width: 960px) {
     .section {
-      padding-top: 170px;
-      padding-bottom: 70px;
+
     }
   }
   .section::before,
@@ -357,7 +398,6 @@
     padding-bottom:20px;
   }
   .text-meta {
-    font-size: 0.875rem;
     line-height: 1.4;
     color: #999;
   }
@@ -391,11 +431,12 @@
   
    .logo{
       float:left;
-      margin-left:-0.8rem
+      margin-left:-0.8rem;
+	  position: absolute; 
+	  top:
   }
   @media only screen and (min-width: 768px){
       .logo{
-          background:#111;
           margin-right:0.8rem
       }
   }
@@ -457,12 +498,11 @@
   @media only screen and (min-width: 45rem) {
       section.column,
       section.columns {
-          padding: 3rem 2.5rem 2rem;
+          padding: 2rem;
       }
   }
   
   .item {
-      margin-bottom: 2.4rem;
       position: relative;
   }
   .item .title {
@@ -484,6 +524,16 @@
   .bold {
       font-weight:bold;
   }
+  
+  
+  a {
+
+    text-decoration: none;
+    color: #04E8B0;
+
+}
+  
+  
   
   /* ========================================================================
     Icons
@@ -762,15 +812,14 @@
   }
   
   table tr {
-      border-bottom: 1px solid rgba(45,55,55,0.7);
+      border-bottom: 1px solid #1E2323;
   
   }
   table tr:last-of-type {
       border: none;
   }
-  table tr:hover td,
-  table tr:hover th {
-      background: rgba(45,55,55,0.7);
+  table tr:hover td {
+      background: #111111;
   }
   table.full-width {
       width: 100%;
@@ -780,6 +829,10 @@
   /* ========================================================================
      Table
    ========================================================================== */
+  
+  .table-height {
+	  min-height:1000px;
+  }
   
   .table {
     border-collapse: collapse;
@@ -796,11 +849,10 @@
     padding: 16px 12px;
     text-align: left;
     vertical-align: bottom;
-    font-size: 0.875rem;
     font-weight: normal;
     color: #999;
     text-transform: uppercase;
-    border-bottom: 1px solid rgba(45,55,55,0.7);
+    border-bottom: 1px solid #1E2323;
   }
   /* Cell
    ========================================================================== */
