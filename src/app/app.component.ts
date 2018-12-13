@@ -1,7 +1,9 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { Chart } from 'chart.js';
-import { RpcService } from './rpc.service';
 import { interval, Observable } from 'rxjs';
+
+import { Chart } from 'chart.js';
+import { environment } from '../environments/environment'
+import { RpcService } from './rpc.service';
 
 @Component({
   selector: 'app-root',
@@ -212,4 +214,12 @@ export class AppComponent implements OnInit {
     return hrMetrics.map(record => record[2]);
   }
 
+
+  getBlockExplorerUrlForBlock(block: string) {
+    return `https://explorer${ environment.testnet ?  "-testnet" : ""}.particl.io/block/${block}`;
+  }
+
+  getBlockExplorerUrlForTx(tx: string) {
+    return `https://explorer${ environment.testnet ?  "-testnet" : ""}.particl.io/tx/${tx}`;
+  }
 }

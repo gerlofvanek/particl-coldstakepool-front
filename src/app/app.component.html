@@ -205,7 +205,7 @@
                     <tbody>
                         <tr *ngFor="let block of api.lastblocks">
                             <td><b>{{block[0] }}</b></td>
-                            <td class="trunc"><a href="https://explorer.particl.io/block/{{ block[1] }}" target="_blank">{{ block[1] }}</a></td>
+                            <td class="trunc"><a href="{{ getBlockExplorerUrlForBlock(block[1]) }}" target="_blank">{{ block[1] }}</a></td>
                             <td>{{ (block[2] / 100000000).toFixed(8) }}</td>
                             <td>{{ (block[3] / 100000000).toFixed(8) }}</td>
                         </tr>
@@ -226,7 +226,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let payment of api.pendingpayments">
-                            <td class="trunc"><a href="https://explorer.particl.io/tx/{{ payment[0] }}" target="_blank">{{ payment[0] }}</a></td>
+                            <td class="trunc"><a href="{{ getBlockExplorerUrlForTx(payment[0]) }}" target="_blank">{{ payment[0] }}</a></td>
                             <td>{{ (payment[1] / 100000000).toFixed(8) }}</td>
                         </tr>
                     </tbody>
@@ -245,7 +245,7 @@
                     <tbody>
                         <tr *ngFor="let payment of api.lastpayments">
                             <td><b>{{ payment[0] }}</b></td>
-                            <td class="trunc"><a href="https://explorer.particl.io/tx/{{ payment[1] }}" target="_blank">{{ payment[1] }}</a></td>
+                            <td class="trunc"><a href="{ getBlockExplorerUrlForTx(payment[1]) }}" target="_blank">{{ payment[1] }}</a></td>
                             <td>{{ (payment[2] / 100000000).toFixed(8) }}</td>
                         </tr>
                     </tbody>

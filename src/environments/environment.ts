@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  url: 'http://66.172.10.231:900',
-  testnet: false
+  url: 'http://66.172.10.231:901',
+  testnet: true
 };
