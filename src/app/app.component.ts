@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { interval, Observable } from 'rxjs';
 
 import { Chart } from 'chart.js';
-import { environment } from '../environments/environment'
+import { environment } from '../environments/environment';
 import { RpcService } from './rpc.service';
 
 @Component({
@@ -11,46 +11,6 @@ import { RpcService } from './rpc.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
-  // Update timer
-  private timer: Observable<number>;
-  private seconds: number = 60 * 1000;
-  private testnet = environment.testnet;
-
-  // Total coins and block chart
-  public chart: Chart;
-  @ViewChild('chartElem') chartElem;
-
-  constructor(private rpc: RpcService) {
-    this.update();
-
-    // Periodically update the information displayed on the page
-    this.timer = interval(this.seconds);
-    this.timer.subscribe((t) => {
-      this.update()
-    });
-  }
-
-  update(): void {
-    this.rpc.getConfig().subscribe(data => {
-      console.log(data);
-      this.config = data;
-    });
-
-    this.rpc.getJson().subscribe(data => {
-      this.api = data;
-    });
-
-    this.rpc.getMetrics().subscribe((data: any) => {
-      this.metrics = data.reverse();
-      const metrics = this.getHumanReadableMetrics(this.metrics);
-      this.chart.data.labels = this.getLabelsForMetrics(metrics);
-      this.chart.data.datasets[0].data = this.getTotalCoinsForMetrics(metrics);
-      this.chart.data.datasets[1].data = this.getBlocksForMetrics(metrics);
-      this.chart.update();
-    });
-  }
-
 
   public api: any = {
     'pooladdress': '...',
@@ -61,7 +21,6 @@ export class AppComponent implements OnInit {
     'poolrewardtotal': 0,
     'poolheight': 0,
     'lastblocks': [
-
     ],
     'blocksfound': 0,
     'stakeweight': 0,
@@ -100,6 +59,45 @@ export class AppComponent implements OnInit {
   private metrics: any = [
     ];
 
+  // Update timer
+  private timer: Observable<number>;
+  private seconds: number = 60 * 1000;
+  private testnet = environment.testnet;
+
+  // Total coins and block chart
+  public chart: Chart;
+  @ViewChild('chartElem') chartElem;
+
+  constructor(private rpc: RpcService) {
+    this.update();
+
+    // Periodically update the information displayed on the page
+    this.timer = interval(this.seconds);
+    this.timer.subscribe((t) => {
+      this.update();
+    });
+  }
+
+  update(): void {
+    this.rpc.getConfig().subscribe(data => {
+      console.log(data);
+      this.config = data;
+    });
+
+    this.rpc.getJson().subscribe(data => {
+      this.api = data;
+    });
+
+    this.rpc.getMetrics().subscribe((data: any) => {
+      this.metrics = data.reverse();
+      const metrics = this.getHumanReadableMetrics(this.metrics);
+      this.chart.data.labels = this.getLabelsForMetrics(metrics);
+      this.chart.data.datasets[0].data = this.getTotalCoinsForMetrics(metrics);
+      this.chart.data.datasets[1].data = this.getBlocksForMetrics(metrics);
+      this.chart.update();
+    });
+  }
+
   ngOnInit() {
     this.createChart();
   }
@@ -110,7 +108,6 @@ export class AppComponent implements OnInit {
    */
   createChart(): void {
     const ctx = this.chartElem.nativeElement.getContext('2d');
-	
     this.chart = new Chart(ctx, {
       type: 'line',
       data: {
@@ -137,7 +134,7 @@ export class AppComponent implements OnInit {
         },
         tooltips: {
           mode: 'index',
-		  displayColors: false
+          displayColors: false
         },
         hover: {
           mode: 'index'
@@ -151,11 +148,10 @@ export class AppComponent implements OnInit {
             scaleLabel: {
               display: false,
               labelString: ''
-			  
             },
             gridLines: {
               display: true,
-			  color: 'rgb(34, 41, 41,2)',
+              color: 'rgb(34, 41, 41,2)',
               lineWidth: 0.5
             },
             ticks: {
@@ -189,7 +185,7 @@ export class AppComponent implements OnInit {
   /**
    * Takes the metrics provided by the pool page and formats them to a more
    * human readable format and fit for usage in charts.
-   * @param metric 
+   * @param metric
    */
   getHumanReadableMetrics(metric: any) {
     const m = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -217,10 +213,10 @@ export class AppComponent implements OnInit {
 
 
   getBlockExplorerUrlForBlock(block: string) {
-    return `https://explorer${ environment.testnet ?  "-testnet" : ""}.particl.io/block/${block}`;
+    return `https://explorer${ environment.testnet ?  '-testnet' : ''}.particl.io/block/${block}`;
   }
 
   getBlockExplorerUrlForTx(tx: string) {
-    return `https://explorer${ environment.testnet ?  "-testnet" : ""}.particl.io/tx/${tx}`;
+    return `https://explorer${ environment.testnet ?  '-testnet' : ''}.particl.io/tx/${tx}`;
   }
 }

@@ -1,361 +1,361 @@
 <!-- intro -->
 <section class="intro">
-	<div class="container">
-		<div class="logo">
-			<a href="http://particl.io">
-				<img src="assets/img/particl-logotype.svg" alt="Particl.io" target="_blank">
-				</a>
-			</div>
-			<div class="section text-center">
-				<img src="assets/img/cold-staking-logo.png" class="cold-staking-logo" alt="Cold Staking Logo">
-					<div class="item pool-address">
-						<p class="text-lead">
-							<span class="blue">PARTICL</span> COLD STAKING POOL
-						</p>
-						<div class="address-string">
-							<span class="white unselectable">{{testnet ? "testnet" : "mainnet"}} POOL ADDRESS:</span>{{ config.pooladdress }}
-						</div>
-					</div>
-					<section class="intro-details columns">
-						<div class="small-block-grid-2 medium-block-grid-5 large-block-grid-5">
-							<div class="item">
-								<h3 class="title">Synced Height</h3>
-								<div class="amount ">{{ api.poolheight | number }} </div>
-								<p class="desc ">Pool's sync status</p>
-							</div>
-							<div class="item">
-								<h3 class="title">Total Pooled Coins</h3>
-								<div class="amount ">{{ api.watchonlytotalbalance.toFixed(3) | number  }}
-									<small class="hide-for-s">PART</small>
-								</div>
-								<p class="desc ">Total combined user coins</p>
-							</div>
-							<div class="item">
-								<h3 class="title">Currently Staking</h3>
-								<div class="amount ">{{ api.stakeweight / 100000000 | number }}
-									<small class="hide-for-s">PART</small>
-								</div>
-								<p class="desc ">Stakeweight</p>
-							</div>
-							<div class="item">
-								<h3 class="title">Blocks Found</h3>
-								<div class="amount">{{ api.blocksfound | number }}</div>
-								<p class="desc ">Total blocks found</p>
-							</div>
-							<div class="item">
-								<h3 class="title">Last Payout Block</h3>
-								<div class="amount">{{api.lastpaymentrunheight | number}}</div>
-								<p class="desc ">Latest reward distribution</p>
-							</div>
-						</div>
-					</section>
-				</div>
-			</div>
-		</section>
-		<!-- intro end -->
-		<hr>
-			<!-- chart -->
-			<section class="chart">
-				<div class="container">
-					<canvas #chartElem id="chart-particl" width="400" height="100">{{chart}}</canvas>
-				</div>
-			</section>
-			<!-- chart end -->
-			<hr>
-				<!-- table -->
-				<div class="container table-height">
-					<div id="detail-tabs">
-						<form>
-							<input id="tab1" type="radio" name="tabs" checked />
-							<label for="tab1">POOL SETTINGS</label>
-							<input id="tab2" type="radio" name="tabs" />
-							<label for="tab2">LATEST BLOCKS FOUND</label>
-							<input id="tab3" type="radio" name="tabs" />
-							<label for="tab3">PENDING PAYMENTS</label>
-							<input id="tab4" type="radio" name="tabs" />
-							<label for="tab4">LATEST PAYMENTS</label>
-							<div class="hide" id="content1">
-								<table class="table text-left">
-									<thead>
-										<tr>
-											<th>SETTINGS</th>
-											<th></th>
-											<th>CONFIG</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td class="table-shrink">
-												<i class="icon icon-server "></i>
-											</td>
-											<td>
-												<b>Mode</b>
-											</td>
-											<td>
-												<span class="text-meta">{{config.mode}}</span>
-											</td>
-										</tr>
-										<tr>
-											<td class="table-shrink">
-												<i class="icon icon-switch"></i>
-											</td>
-											<td>
-												<b>Running</b>
-											</td>
-											<td>
-												<span class="text-meta">{{testnet ? "testnet" : "mainnet"}}</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon icon-snowflake icon-blue"></i>
-											</td>
-											<td>
-												<b>Pool Address</b>
-											</td>
-											<td class="trunc">
-												<span class="text-meta blue">{{config.pooladdress}}</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon icon-cog"></i>
-											</td>
-											<td>
-												<b>Pool Fee</b>
-											</td>
-											<td>
-												<span class="text-meta">{{config.parameters[0].poolfeepercent}}%</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon icon-cog"></i>
-											</td>
-											<td>
-												<b>Stake Bonus</b>
-											</td>
-											<td>
-												<span class="text-meta">{{config.parameters[0].stakebonuspercent}}%</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon icon-cog"></i>
-											</td>
-											<td>
-												<b>Payout Treshhold</b>
-											</td>
-											<td>
-												<span class="text-meta">{{config.parameters[0].payoutthreshold}} PART</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon icon-grid"></i>
-											</td>
-											<td>
-												<b>Blocks Between Payment Runs</b>
-											</td>
-											<td>
-												<span class="text-meta">{{config.parameters[0].minblocksbetweenpayments}} blocks</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon icon-cog"></i>
-											</td>
-											<td>
-												<b>Minimum output value</b>
-											</td>
-											<td>
-												<span class="text-meta">{{config.parameters[0].minoutputvalue}} PART</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon icon-refresh"></i>
-											</td>
-											<td>
-												<b>Synced Height</b>
-											</td>
-											<td>
-												<span class="text-meta">{{api.poolheight | number}}</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon icon-grid"></i>
-											</td>
-											<td>
-												<b>Blocks Found</b>
-											</td>
-											<td>
-												<span class="text-meta">{{api.blocksfound | number}}</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon icon-clock"></i>
-											</td>
-											<td>
-												<b>Last Payment Run</b>
-											</td>
-											<td>
-												<span class="text-meta">{{api.lastpaymentrunheight | number}}</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon icon-stake"></i>
-											</td>
-											<td>
-												<b>Total Pool Rewards</b>
-											</td>
-											<td>
-												<span class="text-meta">{{(api.poolrewardtotal / 100000000)  | number:'0.8'}}</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon icon-stake"></i>
-											</td>
-											<td>
-												<b>Total Pool Fees</b>
-											</td>
-											<td>
-												<span class="text-meta">{{(api.poolfeestotal/ 100000000)  | number:'0.8'}}</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon icon-send"></i>
-											</td>
-											<td>
-												<b>Total Pool Rewards Withdrawn</b>
-											</td>
-											<td>
-												<span class="text-meta">{{(api.poolwithdrawntotal/ 100000000)  | number:'0.8'}}</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon icon-stake"></i>
-											</td>
-											<td>
-												<b>Total Pooled Coins</b>
-											</td>
-											<td>
-												<span class="text-meta">{{api.watchonlytotalbalance  | number}}</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon icon-stake"></i>
-											</td>
-											<td>
-												<b>Staked Balance</b>
-											</td>
-											<td>
-												<span class="text-meta">{{api.stakedbalance | number}}</span>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<div class="hide" id="content2">
-								<table class="table text-left">
-									<thead>
-										<tr>
-											<th>Height</th>
-											<th>Block Hash</th>
-											<th>Block Reward</th>
-											<th>Total Coin Staking</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr *ngFor="let block of api.lastblocks">
-											<td>
-												<b>{{block[0] }}</b>
-											</td>
-											<td class="trunc">
-												<a href="{{ getBlockExplorerUrlForBlock(block[1]) }}" target="_blank">{{ block[1] }}</a>
-											</td>
-											<td>{{ (block[2] / 100000000).toFixed(8) }}</td>
-											<td>{{ (block[3] / 100000000).toFixed(8) }}</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<div class="hide" id="content3">
-								<table class="table text-left">
-									<thead>
-										<tr>
-											<th>Txid</th>
-											<th>Disbursed</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr *ngFor="let payment of api.pendingpayments">
-											<td class="trunc">
-												<a href="{{ getBlockExplorerUrlForTx(payment[0]) }}" target="_blank">{{ payment[0] }}</a>
-											</td>
-											<td>{{ (payment[1] / 100000000).toFixed(8) }}</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<div class="hide" id="content4">
-								<table class="table text-left">
-									<thead>
-										<tr>
-											<th>Height</th>
-											<th>Txid</th>
-											<th>Disbursed</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr *ngFor="let payment of api.lastpayments">
-											<td>
-												<b>{{ payment[0] }}</b>
-											</td>
-											<td class="trunc">
-												<a href="{{ getBlockExplorerUrlForTx(payment[1]) }}" target="_blank">{{ payment[1] }}</a>
-											</td>
-											<td>{{ (payment[2] / 100000000).toFixed(8) }}</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</form>
-					</div>
-				</div>
-				<!-- table end -->
-				<hr>
-					<!-- footer -->
-					<footer id="footer">
-						<div class="container">
-							<div class="section">
-								<section class="columns">
-									<div class="small-block-grid-1 medium-block-grid-1 large-block-grid-1">
-										<div class="item">
-											<!-- please do not remove - thank you! -->
-											<p> © 2018 
-												<a href="https://particl.io" target="_blank">Particl</a> - Privacy-focused Decentralized Applications 
-											</p>
-											<p>
-												<a href="https://github.com/particl/coldstakepool" target="_blank">
-													<img src="assets/icons/github.svg" class="icon-github icon-blue" alt=""> Particl Cold-Staking Pool
-												</a>
-												<a href="https://github.com/gerlofvanek/particl-coldstakepool-front" target="_blank">
-													<img src="assets/icons/github.svg" class="icon-margin-10 icon-github icon-blue" alt=""> Particl Cold-Staking Pool GUI v1.0
-												</a>												
-											</p>										
-											</div>
-											<!-- please do not remove - thank you! -->
-										</div>
-									</section>
-								</div>
-							</div>
-						</footer>
-						<!-- end footer -->
+    <div class="container">
+        <div class="logo">
+            <a href="http://particl.io">
+                <img src="assets/img/particl-logotype.svg" alt="Particl.io" target="_blank">
+            </a>
+        </div>
+        <div class="section text-center">
+            <img src="assets/img/cold-staking-logo.png" class="cold-staking-logo" alt="Cold Staking Logo">
+            <div class="item pool-address">
+                <p class="text-lead">
+                    <span class="blue">PARTICL</span> COLD STAKING POOL
+                </p>
+                <div class="address-string">
+                    <span class="white unselectable">{{testnet ? "testnet" : "mainnet"}} POOL ADDRESS:</span>{{ config.pooladdress }}
+                </div>
+            </div>
+            <section class="intro-details columns">
+                <div class="small-block-grid-2 medium-block-grid-5 large-block-grid-5">
+                    <div class="item">
+                        <h3 class="title">Synced Height</h3>
+                        <div class="amount ">{{ api.poolheight | number }} </div>
+                        <p class="desc ">Pool's sync status</p>
+                    </div>
+                    <div class="item">
+                        <h3 class="title">Total Pooled Coins</h3>
+                        <div class="amount ">{{ api.watchonlytotalbalance.toFixed(3) | number }}
+                            <small class="hide-for-s">PART</small>
+                        </div>
+                        <p class="desc ">Total combined user coins</p>
+                    </div>
+                    <div class="item">
+                        <h3 class="title">Currently Staking</h3>
+                        <div class="amount ">{{ api.stakeweight / 100000000 | number }}
+                            <small class="hide-for-s">PART</small>
+                        </div>
+                        <p class="desc ">Stakeweight</p>
+                    </div>
+                    <div class="item">
+                        <h3 class="title">Blocks Found</h3>
+                        <div class="amount">{{ api.blocksfound | number }}</div>
+                        <p class="desc ">Total blocks found</p>
+                    </div>
+                    <div class="item">
+                        <h3 class="title">Last Payout Block</h3>
+                        <div class="amount">{{api.lastpaymentrunheight | number}}</div>
+                        <p class="desc ">Latest reward distribution</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+<!-- intro end -->
+<hr>
+<!-- chart -->
+<section class="chart">
+    <div class="container">
+        <canvas #chartElem id="chart-particl" width="400" height="100">{{chart}}</canvas>
+    </div>
+</section>
+<!-- chart end -->
+<hr>
+<!-- table -->
+<div class="container table-height">
+    <div id="detail-tabs">
+        <form>
+            <input id="tab1" type="radio" name="tabs" checked />
+            <label for="tab1">POOL SETTINGS</label>
+            <input id="tab2" type="radio" name="tabs" />
+            <label for="tab2">LATEST BLOCKS FOUND</label>
+            <input id="tab3" type="radio" name="tabs" />
+            <label for="tab3">PENDING PAYMENTS</label>
+            <input id="tab4" type="radio" name="tabs" />
+            <label for="tab4">LATEST PAYMENTS</label>
+            <div class="hide" id="content1">
+                <table class="table text-left">
+                    <thead>
+                        <tr>
+                            <th>SETTINGS</th>
+                            <th></th>
+                            <th>CONFIG</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-shrink">
+                                <i class="icon icon-server "></i>
+                            </td>
+                            <td>
+                                <b>Mode</b>
+                            </td>
+                            <td>
+                                <span class="text-meta">{{config.mode}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table-shrink">
+                                <i class="icon icon-switch"></i>
+                            </td>
+                            <td>
+                                <b>Running</b>
+                            </td>
+                            <td>
+                                <span class="text-meta">{{testnet ? "testnet" : "mainnet"}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="icon icon-snowflake icon-blue"></i>
+                            </td>
+                            <td>
+                                <b>Pool Address</b>
+                            </td>
+                            <td class="trunc">
+                                <span class="text-meta blue">{{config.pooladdress}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="icon icon-cog"></i>
+                            </td>
+                            <td>
+                                <b>Pool Fee</b>
+                            </td>
+                            <td>
+                                <span class="text-meta">{{config.parameters[0].poolfeepercent}}%</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="icon icon-cog"></i>
+                            </td>
+                            <td>
+                                <b>Stake Bonus</b>
+                            </td>
+                            <td>
+                                <span class="text-meta">{{config.parameters[0].stakebonuspercent}}%</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="icon icon-cog"></i>
+                            </td>
+                            <td>
+                                <b>Payout Treshhold</b>
+                            </td>
+                            <td>
+                                <span class="text-meta">{{config.parameters[0].payoutthreshold}} PART</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="icon icon-grid"></i>
+                            </td>
+                            <td>
+                                <b>Blocks Between Payment Runs</b>
+                            </td>
+                            <td>
+                                <span class="text-meta">{{config.parameters[0].minblocksbetweenpayments}} blocks</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="icon icon-cog"></i>
+                            </td>
+                            <td>
+                                <b>Minimum output value</b>
+                            </td>
+                            <td>
+                                <span class="text-meta">{{config.parameters[0].minoutputvalue}} PART</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="icon icon-refresh"></i>
+                            </td>
+                            <td>
+                                <b>Synced Height</b>
+                            </td>
+                            <td>
+                                <span class="text-meta">{{api.poolheight | number}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="icon icon-grid"></i>
+                            </td>
+                            <td>
+                                <b>Blocks Found</b>
+                            </td>
+                            <td>
+                                <span class="text-meta">{{api.blocksfound | number}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="icon icon-clock"></i>
+                            </td>
+                            <td>
+                                <b>Last Payment Run</b>
+                            </td>
+                            <td>
+                                <span class="text-meta">{{api.lastpaymentrunheight | number}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="icon icon-stake"></i>
+                            </td>
+                            <td>
+                                <b>Total Pool Rewards</b>
+                            </td>
+                            <td>
+                                <span class="text-meta">{{(api.poolrewardtotal / 100000000)  | number:'0.8'}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="icon icon-stake"></i>
+                            </td>
+                            <td>
+                                <b>Total Pool Fees</b>
+                            </td>
+                            <td>
+                                <span class="text-meta">{{(api.poolfeestotal/ 100000000)  | number:'0.8'}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="icon icon-send"></i>
+                            </td>
+                            <td>
+                                <b>Total Pool Rewards Withdrawn</b>
+                            </td>
+                            <td>
+                                <span class="text-meta">{{(api.poolwithdrawntotal/ 100000000)  | number:'0.8'}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="icon icon-stake"></i>
+                            </td>
+                            <td>
+                                <b>Total Pooled Coins</b>
+                            </td>
+                            <td>
+                                <span class="text-meta">{{api.watchonlytotalbalance  | number}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="icon icon-stake"></i>
+                            </td>
+                            <td>
+                                <b>Staked Balance</b>
+                            </td>
+                            <td>
+                                <span class="text-meta">{{api.stakedbalance | number}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="hide" id="content2">
+                <table class="table text-left">
+                    <thead>
+                        <tr>
+                            <th>Height</th>
+                            <th>Block Hash</th>
+                            <th>Block Reward</th>
+                            <th>Total Coin Staking</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let block of api.lastblocks">
+                            <td>
+                                <b>{{block[0] }}</b>
+                            </td>
+                            <td class="trunc">
+                                <a href="{{ getBlockExplorerUrlForBlock(block[1]) }}" target="_blank">{{ block[1] }}</a>
+                            </td>
+                            <td>{{ (block[2] / 100000000).toFixed(8) }}</td>
+                            <td>{{ (block[3] / 100000000).toFixed(8) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="hide" id="content3">
+                <table class="table text-left">
+                    <thead>
+                        <tr>
+                            <th>Txid</th>
+                            <th>Disbursed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let payment of api.pendingpayments">
+                            <td class="trunc">
+                                <a href="{{ getBlockExplorerUrlForTx(payment[0]) }}" target="_blank">{{ payment[0] }}</a>
+                            </td>
+                            <td>{{ (payment[1] / 100000000).toFixed(8) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="hide" id="content4">
+                <table class="table text-left">
+                    <thead>
+                        <tr>
+                            <th>Height</th>
+                            <th>Txid</th>
+                            <th>Disbursed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let payment of api.lastpayments">
+                            <td>
+                                <b>{{ payment[0] }}</b>
+                            </td>
+                            <td class="trunc">
+                                <a href="{{ getBlockExplorerUrlForTx(payment[1]) }}" target="_blank">{{ payment[1] }}</a>
+                            </td>
+                            <td>{{ (payment[2] / 100000000).toFixed(8) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- table end -->
+<hr>
+<!-- footer -->
+<footer id="footer">
+    <div class="container">
+        <div class="section">
+            <section class="columns">
+                <div class="small-block-grid-1 medium-block-grid-1 large-block-grid-1">
+                    <div class="item">
+                        <!-- please do not remove - thank you! -->
+                        <p> © 2018
+                            <a href="https://particl.io" target="_blank">Particl</a> - Privacy-focused Decentralized Applications
+                        </p>
+                        <p>
+                            <a href="https://github.com/particl/coldstakepool" target="_blank">
+                                <img src="assets/icons/github.svg" class="icon-github icon-blue" alt=""> Particl Cold-Staking Pool
+                            </a>
+                            <a href="https://github.com/gerlofvanek/particl-coldstakepool-front" target="_blank">
+                                <img src="assets/icons/github.svg" class="icon-margin-10 icon-github icon-blue" alt=""> Particl Cold-Staking Pool GUI v1.0
+                            </a>
+                        </p>
+                    </div>
+                    <!-- please do not remove - thank you! -->
+                </div>
+            </section>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->
