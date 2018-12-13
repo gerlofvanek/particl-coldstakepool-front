@@ -1,5 +1,7 @@
 # particl-coldstakepool-front
 
+![UI Preview](preview.jpg)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.
 
 ## Development server
