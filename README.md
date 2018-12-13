@@ -1,4 +1,4 @@
-# particl-coldstakepool-front
+# Particl Cold-Staking Pool Front - GUI
 
 ![UI Preview](preview.jpg)
 
