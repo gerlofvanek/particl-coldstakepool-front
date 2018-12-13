@@ -290,6 +290,14 @@
   .intro {
 
 	  background: #111;
+	    background-image: url("assets/img/background.png");
+  background-repeat: no-repeat;
+  background-position: center top;
+  }
+  
+    footer {
+
+	  background: #111;
   }
   
   .chart {
@@ -310,9 +318,6 @@
 
 }
 
-.blue {color:#12AFFF;}
-
-.white {color:#fff;}
 
 .unselectable {
     -webkit-touch-callout: none;
@@ -321,7 +326,9 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+	margin-right:10px; /*todo*/
 }
+
   
   /* ========================================================================
      Container
@@ -340,12 +347,15 @@
       padding-left: 30px;
       padding-right: 30px;
     }
+	
   }
   @media (min-width: 960px) {
     .container {
       padding-left: 40px;
       padding-right: 40px;
     }
+	
+	
   }
   .container::before,
   .container::after {
@@ -455,9 +465,14 @@
    ========================================================================== */
    
   hr {
-      border: 1px solid #1E2323;
-      margin: 0;
+    border: none;
+    height: 1px;
+    /* Set the hr color */
+    color: #1E2323; /* old IE */
+    background-color: #1E2323; /* Modern Browsers */
+	margin:0;
   }
+		
   a {
       color: #04E8B0;
   }
@@ -533,7 +548,9 @@
 
 }
   
-  
+  .blue {color:#12AFFF;}
+
+.white {color:#fff;}
   
   /* ========================================================================
     Icons
@@ -738,7 +755,7 @@
   }
   
   /* ========================================================================
-      Tables - tabs TODO (nobile-friendly /cleanup)
+      Tables - tabs
    ========================================================================== */
   
   #detail-tabs {
@@ -761,13 +778,13 @@
     padding: 15px 25px;
     font-weight: 600;
     text-align: center;
-    color: #6D8484;
+    color: #6D8484;	
   }
   
   label:before {
     font-weight: normal;
     margin-right: 10px;
-      font-family: 'Particl';
+    font-family: 'Particl';
   }
   
   /*
@@ -778,15 +795,14 @@
   */
   
   label:hover {
-    color: #789;
+    color: #fff;
     cursor: pointer;
   }
   
   input:checked + label {
-    color: #abc;
+    color: #fff;
     border-top: 2px solid #12afff;
-  
-  }
+    }
   
   #tab1:checked ~ #content1,
   #tab2:checked ~ #content2,
@@ -795,22 +811,11 @@
     display: block;
   }
   
-  @media screen and (max-width: 800px) {
-    label {
-      font-size: 14px;
-    }
-    label:before {
-      margin: 0;
-      font-size: 18px;
-    }
-  }
-  
-  @media screen and (max-width: 500px) {
-    label {
-      padding: 15px;
-    }
-  }
-  
+
+   
+  /* ========================================================================
+     Table
+   ========================================================================== */
   table tr {
       border-bottom: 1px solid #1E2323;
   
@@ -824,11 +829,6 @@
   table.full-width {
       width: 100%;
   }
-  
-  
-  /* ========================================================================
-     Table
-   ========================================================================== */
   
   .table-height {
 	  min-height:1000px;
@@ -968,6 +968,18 @@
     .table-responsive tr {
       display: block;
     }
+	table td.trunc {
+    display: inline-block;
+    max-width: 7rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+	color:#999;
+}
+   label {
+	width:100%;
+	font-size: 13px;
+   }
     .table-responsive thead {
       display: none;
     }

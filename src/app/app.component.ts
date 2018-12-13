@@ -115,7 +115,7 @@ export class AppComponent implements OnInit {
         datasets: [{
           label: 'Total pooled coins',
           borderColor: 'rgb(3, 232, 176,2)',
-          borderWidth: 2,
+          borderWidth: 3,
           pointBorderWidth: 4,
           pointBackgroundColor: 'rgb(34, 41, 41,2)',
           pointBorderColor: 'rgba(250, 250, 250,2)',

@@ -1,33 +1,29 @@
-<!-- intro todo (GFX logo/background, Github button) -->
+<!-- intro -->
 <section class="intro">
 
-    <div class="container">
+<div class="container">
 	
       <div class="logo">
             <a href="/"><img src="assets/img/particl-logotype.svg" alt="Particl.io"></a>
-        </div>  
-        <div class="section text-center">
+       </div> 
+	   
+       <div class="section text-center">
       
-
 <img src="assets/img/cold-staking-logo.png" class="cold-staking-logo" alt="">
 
 			<div class="item pool-address">
 			     <p class="text-lead"><span class="blue">PARTICL</span> COLD STAKING POOL</p>
-			<div class="address-string"><span class="white unselectable">Pool address:</span> {{ config.pooladdress }}</div>
+			<div class="address-string"><span class="white unselectable">Pool address:</span>{{ config.pooladdress }}</div>
 			</div>
 			
-			
-			
-            <section class="intro-details columns">
-
+           <section class="intro-details columns">
                 <div class="small-block-grid-2 medium-block-grid-5 large-block-grid-5">
 
                     <div class="item">
                         <h3 class="title">Synced Height</h3>
-                        <div class="amount ">{{ api.poolheight | number }}</div>
+                        <div class="amount ">{{ api.poolheight | number }} </div>
                         <p class="desc ">Pool's sync status</p>
-                    </div>
-
+                    </div>					
                     <div class="item">
                         <h3 class="title">Total Pooled Coins</h3>
                         <div class="amount ">{{ api.watchonlytotalbalance.toFixed(3) | number  }}<small class="hide-for-s">PART</small></div>
@@ -36,8 +32,8 @@
 
                     <div class="item">
                         <h3 class="title">Currently Staking</h3>
-                        <div class="amount ">{{ api.stakedbalance | number }}<small class="hide-for-s">PART</small></div>
-                        <p class="desc ">Current amount staked</p>
+                        <div class="amount ">{{ api.stakeweight / 100000000 | number }}<small class="hide-for-s">PART</small></div>
+                        <p class="desc ">Stakeweight</p>
                     </div>
 
                     <div class="item">
@@ -53,14 +49,16 @@
                     </div>			
 
                 </div>
-
             </section>
 
         </div>
     </div>
 </section>
 <!-- intro end -->
+
 <hr>
+
+<!-- chart -->
 <section class="chart">
 
     <div class="container">
@@ -68,11 +66,11 @@
 
     </div>
 </section>
-<!-- intro end -->
+<!-- chart end -->
 
 <hr>
 
-<!-- table (todo: fix table mobile-friendly / icons -->
+<!-- table -->
 <div class="container table-height">
 
     <div id="detail-tabs">
@@ -92,7 +90,7 @@
 
 
             <div class="hide" id="content1">
-                <table class="table table-responsive text-left">
+                <table class="table text-left">
                     <thead>
 
                         <tr>
@@ -111,7 +109,7 @@
                         <tr>
                             <td><i class="icon icon-snowflake icon-blue"></i></td>
                             <td><b>Pool Address</b></td>
-                            <td style="text-align:left"><span class="text-meta address">{{config.pooladdress}}</span></td>
+                            <td class="trunc"><span class="text-meta blue">{{config.pooladdress}}</span></td>
                         </tr>
                         <tr>
                             <td><i class="icon icon-cog"></i></td>
@@ -181,7 +179,7 @@
                         </tr>
                         <tr>
                             <td><i class="icon icon-stake"></i></td>
-                            <td><b>Currently Staking</b></td>
+                            <td><b>Staked Balance</b></td>
                             <td style="text-align:left"><span class="text-meta">{{api.stakedbalance | number}}</span></td>
                         </tr>
 
@@ -190,7 +188,7 @@
             </div>
 
             <div class="hide" id="content2">
-                <table class="table table-responsive text-left">
+                <table class="table text-left">
                     <thead>
                         <tr>
                             <th>Height</th>
@@ -202,7 +200,7 @@
                     <tbody>
                         <tr *ngFor="let block of api.lastblocks">
                             <td><b>{{block[0] }}</b></td>
-                            <td><a href="https://explorer.particl.io/block/{{ block[1] }}" target="_blank">{{ block[1] }}</a></td>
+                            <td class="trunc"><a href="https://explorer.particl.io/block/{{ block[1] }}" target="_blank">{{ block[1] }}</a></td>
                             <td>{{ (block[2] / 100000000).toFixed(8) }}</td>
                             <td>{{ (block[3] / 100000000).toFixed(8) }}</td>
                         </tr>
@@ -214,7 +212,7 @@
             </div>
 
             <div class="hide" id="content3">
-                <table class="table table-responsive text-left">
+                <table class="table text-left">
                     <thead>
                         <tr>
                             <th>Txid</th>
@@ -223,7 +221,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let payment of api.pendingpayments">
-                            <td><a href="https://explorer.particl.io/tx/{{ payment[0] }}" target="_blank">{{ payment[0] }}</a></td>
+                            <td class="trunc"><a href="https://explorer.particl.io/tx/{{ payment[0] }}" target="_blank">{{ payment[0] }}</a></td>
                             <td>{{ (payment[1] / 100000000).toFixed(8) }}</td>
                         </tr>
                     </tbody>
@@ -231,7 +229,7 @@
             </div>
 
             <div class="hide" id="content4">
-                <table class="table table-responsive text-left">
+                <table class="table text-left">
                     <thead>
                         <tr>
                             <th>Height</th>
@@ -242,7 +240,7 @@
                     <tbody>
                         <tr *ngFor="let payment of api.lastpayments">
                             <td><b>{{ payment[0] }}</b></td>
-                            <td><a href="https://explorer.particl.io/tx/{{ payment[1] }}" target="_blank">{{ payment[1] }}</a></td>
+                            <td class="trunc"><a href="https://explorer.particl.io/tx/{{ payment[1] }}" target="_blank">{{ payment[1] }}</a></td>
                             <td>{{ (payment[2] / 100000000).toFixed(8) }}</td>
                         </tr>
                     </tbody>
@@ -252,4 +250,37 @@
     </div>
 
 </div>
-<!-- content end -->
+<!-- table end -->
+
+<hr>
+
+<!-- footer -->
+<footer id="footer">
+
+
+<div class="container">
+	
+   
+	   
+       <div class="section">
+      
+
+
+			
+           <section class="intro-details columns">
+                <div class="small-block-grid-1 medium-block-grid-1 large-block-grid-1">
+
+                  <!-- Please do not remove -->
+          		<p>© 2018  <a href="http://particl.io" target="_blank">Particl</a> - Particl cold staking pool github: <a href="https://github.com/particl/coldstakepool" target="_blank">particl/coldstakepool</a></p>
+				 <!-- /Please do not remove -->
+				</div>
+				
+
+              
+            </section>
+
+        </div>
+    </div>
+
+</footer>
+<!-- end footer -->
