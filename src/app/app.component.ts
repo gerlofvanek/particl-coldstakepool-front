@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
   // Update timer
   private timer: Observable<number>;
   private seconds: number = 60 * 1000;
-  private testnet = environment.testnet;
+  public testnet = environment.testnet;
 
   // Total coins and block chart
   public chart: Chart;

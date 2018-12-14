@@ -972,7 +972,6 @@
  	float: left;
  	margin-left: -0.8rem;
  	position: absolute;
- 	top:
  }
  @media only screen and (min-width: 768px) {
  	.logo {
@@ -1117,13 +1116,12 @@
  	font-weight: normal;
  	font-style: normal;
 }
- 
  /*------------------------
       base class definition
   -------------------------*/
  .icon {
  	display: inline-block;
- 	font: normal normal normal 1em/1'Particl';
+ 	font: normal normal normal 1em/1 'Particl';
  	speak: none;
  	text-transform: none;
  	/* Better Font Rendering */
