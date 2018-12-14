@@ -814,7 +814,7 @@
  	box-sizing: border-box;
  }
  html {
- 	font-family: 'Inter UI', sans-serif;
+ 	font-family: 'Inter UI', 'Particl', sans-serif;
  	font-weight: normal;
  	line-height: 1.5;
  	-webkit-text-size-adjust: 100%;
@@ -822,10 +822,11 @@
  }
  @supports (font-variation-settings: normal) {
  	html {
- 		font-family: 'Inter UI var', sans-serif;
+ 	font-family: 'Inter UI', 'Particl', sans-serif;
  	}
  }
  body {
+	font-family: 'Inter UI', 'Particl', sans-serif;
  	background: #0E0E0E;
  	color: #fff;
  	font-size: 13px;
@@ -1093,6 +1094,8 @@
    ========================================================================== */
  .icon {
  	color: #03E8B0;
+	font-weight: normal;
+	font-style: normal;
  }
  .icon-blue {
  	color: #12afff;
@@ -1108,13 +1111,13 @@
 	margin-left: 10px;
 }
 
- @font-face {
+@font-face {
  	font-family: 'Particl';
- 	src: url('assets/fonts/Particl.eot');
  	src: url('assets/fonts/Particl.eot') format('embedded-opentype'), url('assets/fonts/Particl.woff2') format('woff2'), url('assets/fonts/Particl.woff') format('woff'), url('assets/fonts/Particl.ttf') format('truetype'), url('assets/fonts/Particl.svg') format('svg');
  	font-weight: normal;
  	font-style: normal;
- }
+}
+ 
  /*------------------------
       base class definition
   -------------------------*/
