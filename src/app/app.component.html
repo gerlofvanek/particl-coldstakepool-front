@@ -13,6 +13,10 @@
                     <span class="blue">PARTICL</span> COLD STAKING POOL
                 </p>
                 <div class="address-string">
+                    <ngx-qrcode 
+                        [qrc-value] = "config.pooladdress"
+                        qrc-errorCorrectionLevel = "L">
+                    </ngx-qrcode>
                     <span class="white unselectable">{{testnet ? "testnet" : "mainnet"}} POOL ADDRESS:</span>{{ config.pooladdress }}
                 </div>
             </div>
