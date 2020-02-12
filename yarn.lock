@@ -290,13 +290,6 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@cmgustavo/ngx-qrcode@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@cmgustavo/ngx-qrcode/-/ngx-qrcode-1.0.1.tgz#12f09889495be63b9d027b5f215407986a8f8223"
-  integrity sha512-TwQMNf4XTD3pT3IsswJmEcDPYSwsCCUyamhiAsHhMZClwIkDRgmBBGxYkQW2HjlG4MnTgN1Y9i2UUF1imxXcDA==
-  dependencies:
-    qrcode "^0.8.2"
-
 "@ngtools/webpack@7.0.5":
   version "7.0.5"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-7.0.5.tgz#af7139cdd3c46774b80a09753cb4e51c27d18fc4"
@@ -4341,6 +4334,13 @@ neo-async@^2.5.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.0.tgz#b9d15e4d71c6762908654b5183ed38b753340835"
   integrity sha512-MFh0d/Wa7vkKO3Y3LlacqAEeHK0mckVqzDieUKTT+KGxi+zIpeVsFxymkIiRpbpDziHc290Xr9A1O4Om7otoRA==
+
+ngx-qrcode2@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/ngx-qrcode2/-/ngx-qrcode2-0.0.9.tgz#8229783623b60f79cce155e763ac170d8ad1eae8"
+  integrity sha512-PsELe+37ktkD/xv3rodWb7r5viK4KNZP9BqxmluyI7MCruea48+PqKNKQOx6R+V+8zypbb7vWxXJxGRlrdAaBQ==
+  dependencies:
+    qrcode "^0.8.2"
 
 nice-try@^1.0.4:
   version "1.0.5"
