@@ -1,70 +1,123 @@
 <!-- intro -->
 <section class="intro">
     <div class="container">
-        <div class="logo">
-            <a href="http://particl.io">
-                <img src="assets/img/particl-logotype.svg" alt="Particl.io" target="_blank">
-            </a>
-        </div>
         <div class="section text-center">
             <img src="assets/img/cold-staking-logo.png" class="cold-staking-logo" alt="Cold Staking Logo">
             <div class="item pool-address">
                 <p class="text-lead">
-                    <span class="blue">PARTICL</span> COLD STAKING POOL
+                    <span class="green">PARTICL</span> COLD STAKING POOL
                 </p>
+
+                <ngx-qrcode
+                    [qrc-value] = "config.pooladdress"
+                    qrc-errorCorrectionLevel = "L">
+                </ngx-qrcode>
+  <br><br>
                 <div class="address-string">
-                    <ngx-qrcode 
-                        [qrc-value] = "config.pooladdress"
-                        qrc-errorCorrectionLevel = "L">
-                    </ngx-qrcode>
+
                     <span class="white unselectable">{{testnet ? "testnet" : "mainnet"}} POOL ADDRESS:</span>{{ config.pooladdress }}
                 </div>
             </div>
-            <section class="intro-details columns">
-                <div class="small-block-grid-2 medium-block-grid-5 large-block-grid-5">
-                    <div class="item">
-                        <h3 class="title">Synced Height</h3>
-                        <div class="amount ">{{ api.poolheight | number }} </div>
-                        <p class="desc ">Pool's sync status</p>
-                    </div>
-                    <div class="item">
-                        <h3 class="title">Total Pooled Coins</h3>
-                        <div class="amount ">{{ api.watchonlytotalbalance.toFixed(3) | number }}
-                            <small class="hide-for-s">PART</small>
-                        </div>
-                        <p class="desc ">Total combined user coins</p>
-                    </div>
-                    <div class="item">
-                        <h3 class="title">Currently Staking</h3>
-                        <div class="amount ">{{ api.stakeweight / 100000000 | number }}
-                            <small class="hide-for-s">PART</small>
-                        </div>
-                        <p class="desc ">Stakeweight</p>
-                    </div>
-                    <div class="item">
-                        <h3 class="title">Blocks Found</h3>
-                        <div class="amount">{{ api.blocksfound | number }}</div>
-                        <p class="desc ">Total blocks found</p>
-                    </div>
-                    <div class="item">
-                        <h3 class="title">Last Payout Block</h3>
-                        <div class="amount">{{api.lastpaymentrunheight | number}}</div>
-                        <p class="desc ">Latest reward distribution</p>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
-</section>
+
+      <br><br>
+          </div>
+          </div>
+      </section>
 <!-- intro end -->
 <hr>
-<!-- chart -->
-<section class="chart">
-    <div class="container">
-        <canvas #chartElem id="chart-particl" width="400" height="100">{{chart}}</canvas>
+<div class="container">
+
+    <div id="chart-tabs">
+        <form>
+            <input id="charts_tab1" type="radio" name="chart_tabs" checked />
+            <label for="charts_tab1">POOLED COINS</label>
+            <input id="charts_tab2" type="radio" name="chart_tabs" />
+            <label for="charts_tab2">HOURLY STAKING RATE</label>
+            <input id="charts_tab3" type="radio" name="chart_tabs" />
+            <label for="charts_tab3">DAILY STAKING RATE</label>
+            <div class="hide" id="charts_tab1_content">
+	      <!-- chart -->
+	      <section class="chart">
+		<div class="container">
+		  <canvas #chartElem id="chart-particl" width="400" height="100">{{chart}}</canvas>
+		</div>
+	      </section>
+	      <!-- chart end -->
+	    </div>
+            <div class="hide" id="charts_tab2_content">
+	      <!-- chart -->
+	      <section class="chart">
+		<div class="container">
+		  <canvas #chartElem1 id="chart-stakingrate-hourly" width="400" height="100">{{stakingRateHourlyChart}}</canvas>
+		</div>
+	      </section>
+	      <!-- chart end -->
+	    </div>
+	    <div class="hide" id="charts_tab3_content">
+	      <!-- chart -->
+	      <section class="chart">
+		<div class="container">
+		  <canvas #chartElem2 id="chart-stakingrate-daily" width="400" height="100">{{stakingRateDailyChart}}</canvas>
+		</div>
+	      </section>
+	      <!-- chart end -->
+	    </div>
+	</form>
     </div>
+</div>
+<hr>
+
+
+<hr>
+
+<section class="intro-details">
+      <div class="container">
+    <div class="small-block-grid-2 medium-block-grid-5 large-block-grid-5">
+        <div class="item">
+            <h3 class="title">Synced Height</h3>
+            <div class="amount ">{{ api.poolheight | number }} </div>
+            <p class="desc ">Pool's sync status</p>
+        </div>
+        <div class="item">
+            <h3 class="title">Total Pooled Coins</h3>
+            <div class="amount ">{{ api.watchonlytotalbalance.toFixed(3) | number }}
+                <small class="hide-for-s">PART</small>
+            </div>
+            <p class="desc ">Total combined user coins</p>
+        </div>
+        <div class="item">
+            <h3 class="title">Currently Staking</h3>
+            <div class="amount ">{{ api.stakeweight / 100000000 | number }}
+                <small class="hide-for-s">PART</small>
+            </div>
+            <p class="desc ">Stakeweight</p>
+        </div>
+        <div class="item">
+            <h3 class="title">Blocks Found</h3>
+            <div class="amount">{{ api.blocksfound | number }}</div>
+            <p class="desc ">Total blocks found</p>
+        </div>
+        <div class="item">
+            <h3 class="title">Last Payout Block</h3>
+            <div class="amount">{{api.lastpaymentrunheight | number}}</div>
+            <p class="desc ">Latest reward distribution</p>
+        </div>
+        <div class="item">
+            <h3 class="title">Staking Interest Rate </h3>
+            <div class="amount">{{(pdstat.actual_rate*1.0).toFixed(2) | number }}%</div>
+            <p class="desc ">Effective staking interest rate averaged over last 100 blocks</p>
+        </div>
+  <!--      <div class="item">
+            <h3 class="title">Marketplace Fee Vote </h3>
+            <div class="amount">{{pdstat.smsg_fee_rate_target | number:'1.0-8'}}
+<small class="hide-for-s">PART</small>
+</div>
+            <p class="desc ">Pool's Marketplace fee vote (SMSG fee rate target)</p>
+        </div> -->
+    </div>
+  </div>
 </section>
-<!-- chart end -->
+
 <hr>
 <!-- table -->
 <div class="container table-height">
@@ -72,12 +125,19 @@
         <form>
             <input id="tab1" type="radio" name="tabs" checked />
             <label for="tab1">POOL SETTINGS</label>
+
             <input id="tab2" type="radio" name="tabs" />
             <label for="tab2">LATEST BLOCKS FOUND</label>
+
             <input id="tab3" type="radio" name="tabs" />
             <label for="tab3">PENDING PAYMENTS</label>
+
             <input id="tab4" type="radio" name="tabs" />
             <label for="tab4">LATEST PAYMENTS</label>
+
+            <input id="tab5" type="radio" name="tabs" />
+            <label for="tab5">PARTICL NODE STATUS</label>
+
             <div class="hide" id="content1">
                 <table class="table text-left">
                     <thead>
@@ -122,6 +182,17 @@
                             </td>
                         </tr>
                         <tr>
+                          <td>
+			    <i class="icon icon-stake"></i>
+                          </td>
+                          <td>
+                            <b>Reward Address</b>
+                          </td>
+                          <td class="trunc">
+                            <a href="{{getBlockExplorerUrlForAdr(config.rewardaddress)}}" target="_blank">{{ config.rewardaddress }}</a>
+                          </td>
+                        </tr>
+                        <tr>
                             <td>
                                 <i class="icon icon-cog"></i>
                             </td>
@@ -130,17 +201,6 @@
                             </td>
                             <td>
                                 <span class="text-meta">{{config.parameters[0].poolfeepercent}}%</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <i class="icon icon-cog"></i>
-                            </td>
-                            <td>
-                                <b>Stake Bonus</b>
-                            </td>
-                            <td>
-                                <span class="text-meta">{{config.parameters[0].stakebonuspercent}}%</span>
                             </td>
                         </tr>
                         <tr>
@@ -174,6 +234,17 @@
                             </td>
                             <td>
                                 <span class="text-meta">{{config.parameters[0].minoutputvalue}} PART</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="icon icon-cog"></i>
+                            </td>
+                            <td>
+                                <b>SMSG Fee Rate Target</b>
+                            </td>
+                            <td>
+                                <span class="text-meta">{{pdstat.smsg_fee_rate_target | number:'1.8'}} PART</span>
                             </td>
                         </tr>
                         <tr>
@@ -214,10 +285,10 @@
                                 <i class="icon icon-stake"></i>
                             </td>
                             <td>
-                                <b>Total Pool Rewards</b>
+                                <b>Total Pool Fees</b>
                             </td>
                             <td>
-                                <span class="text-meta">{{(api.poolrewardtotal / 100000000)  | number:'0.8'}}</span>
+                                <span class="text-meta">{{(api.poolrewardtotal / 100000000)  | number:'0.8'}} PART</span>
                             </td>
                         </tr>
                         <tr>
@@ -225,10 +296,10 @@
                                 <i class="icon icon-stake"></i>
                             </td>
                             <td>
-                                <b>Total Pool Fees</b>
+                                <b>Total Transaction Fees</b>
                             </td>
                             <td>
-                                <span class="text-meta">{{(api.poolfeestotal/ 100000000)  | number:'0.8'}}</span>
+                                <span class="text-meta">{{(api.poolfeestotal/ 100000000)  | number:'0.8'}} PART</span>
                             </td>
                         </tr>
                         <tr>
@@ -236,10 +307,10 @@
                                 <i class="icon icon-send"></i>
                             </td>
                             <td>
-                                <b>Total Pool Rewards Withdrawn</b>
+                                <b>Total Pool Fees Withdrawn</b>
                             </td>
                             <td>
-                                <span class="text-meta">{{(api.poolwithdrawntotal/ 100000000)  | number:'0.8'}}</span>
+                                <span class="text-meta">{{(api.poolwithdrawntotal/ 100000000)  | number:'0.8'}} PART</span>
                             </td>
                         </tr>
                         <tr>
@@ -250,7 +321,7 @@
                                 <b>Total Pooled Coins</b>
                             </td>
                             <td>
-                                <span class="text-meta">{{api.watchonlytotalbalance  | number}}</span>
+                                <span class="text-meta">{{api.watchonlytotalbalance  | number}} PART</span>
                             </td>
                         </tr>
                         <tr>
@@ -261,7 +332,7 @@
                                 <b>Staked Balance</b>
                             </td>
                             <td>
-                                <span class="text-meta">{{api.stakedbalance | number}}</span>
+                                <span class="text-meta">{{api.stakedbalance | number}} PART</span>
                             </td>
                         </tr>
                     </tbody>
@@ -331,6 +402,43 @@
                     </tbody>
                 </table>
             </div>
+            <div class="hide" id="content5">
+                <table class="table text-left">
+                    <tbody>
+		      <tr>
+			<td class="table-shrink">
+                          <i class="icon icon-switch"></i>
+                        </td>
+			<td>Status</td><td><span class="text-meta">{{pdstat.status}}</span></td>
+		      </tr>
+		      <tr>
+                        <td>
+                          <i class="icon icon-server "></i>
+                        </td>
+			<td>Version</td><td><span class="text-meta">{{pdstat.version}}</span></td>
+		      </tr>
+		      <tr>
+                        <td>
+                          <i class="icon icon-server "></i>
+                        </td>
+			<td>Uptime</td><td><span class="text-meta">{{pdstat.uptime}}</span></td>
+		      </tr>
+		      <tr>
+                        <td>
+                          <i class="icon icon-server "></i>
+                        </td>
+			<td>Peers</td><td><span class="text-meta">{{pdstat.peers}}</span></td>
+		      </tr>
+		      <tr>
+			<td>
+                          <i class="icon icon-refresh"></i>
+                        </td>
+			<td>Last Block</td><td><span class="text-meta">{{pdstat.last_block}}</span></td>
+		      </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </form>
     </div>
 </div>
@@ -344,15 +452,15 @@
                 <div class="small-block-grid-1 medium-block-grid-1 large-block-grid-1">
                     <div class="item">
                         <!-- please do not remove - thank you! -->
-                        <p> © 2019
-                            <a href="https://particl.io" target="_blank">Particl</a> - Privacy-focused Decentralized Applications
+                        <p> © 2020~
+                            <a href="https://particl.io" target="_blank">Particl</a>
                         </p>
                         <p>
-                            <a href="https://github.com/particl/coldstakepool" target="_blank">
-                                <img src="assets/icons/github.svg" class="icon-github icon-blue" alt=""> Particl Cold-Staking Pool
+                            <a href="https://github.com/tecnovert/particl-coldstakepool" target="_blank">
+                                <img src="assets/icons/github.svg" class="icon-github icon-blue" alt="">Particl Cold-Staking Pool
                             </a>
                             <a href="https://github.com/gerlofvanek/particl-coldstakepool-front" target="_blank">
-                                <img src="assets/icons/github.svg" class="icon-margin-10 icon-github icon-blue" alt=""> Particl Cold-Staking Pool GUI v1.0
+                                <img src="assets/icons/github.svg" class="icon-margin-10 icon-github icon-blue" alt="">Particl Cold-Staking Pool Front (GUI)
                             </a>
                         </p>
                     </div>

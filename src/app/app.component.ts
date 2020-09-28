@@ -56,6 +56,17 @@ export class AppComponent implements OnInit {
     'debug': true
   };
 
+    public pdstat: any = {
+	"status":"...",
+	"uptime":"",
+	"peers":"",
+	"last_block":"",
+	"version":"",
+	"staking":"",
+	"nominal_rate":"0",
+	"actual_rate":"0"
+    };
+
   private metrics: any = [
     ];
 
@@ -66,7 +77,12 @@ export class AppComponent implements OnInit {
 
   // Total coins and block chart
   public chart: Chart;
+  public stakingRateHourlyChart: Chart;
+  public stakingRateDailyChart: Chart;
+
   @ViewChild('chartElem') chartElem;
+  @ViewChild('chartElem1') chartElem1;
+  @ViewChild('chartElem2') chartElem2;
 
   constructor(private rpc: RpcService) {
     this.update();
@@ -80,12 +96,16 @@ export class AppComponent implements OnInit {
 
   update(): void {
     this.rpc.getConfig().subscribe(data => {
-      console.log(data);
+      //console.log(data);
       this.config = data;
     });
 
     this.rpc.getJson().subscribe(data => {
       this.api = data;
+    });
+
+    this.rpc.getParticldStat().subscribe(data => {
+      this.pdstat = data;
     });
 
     this.rpc.getMetrics().subscribe((data: any) => {
@@ -96,10 +116,26 @@ export class AppComponent implements OnInit {
       this.chart.data.datasets[1].data = this.getBlocksForMetrics(metrics);
       this.chart.update();
     });
+
+
+    this.rpc.getStakingRate().subscribe((data: any) => {
+	this.stakingRateHourlyChart.data.datasets[0].data = this.getPoints(data.hourly, 1);
+	this.stakingRateHourlyChart.data.datasets[1].data = this.getPoints(data.hourly, 2);
+	this.stakingRateHourlyChart.data.datasets[2].data = this.getPoints(data.hourly, 3);
+	this.stakingRateHourlyChart.update();
+
+	this.stakingRateDailyChart.data.datasets[0].data = this.getPoints(data.daily, 1);
+	this.stakingRateDailyChart.data.datasets[1].data = this.getPoints(data.daily, 2);
+	this.stakingRateDailyChart.data.datasets[2].data = this.getPoints(data.daily, 3);
+	this.stakingRateDailyChart.update();
+    });
+
   }
 
   ngOnInit() {
     this.createChart();
+    this.createStakingRateHourlyChart();
+    this.createStakingRateDailyChart();
   }
 
   /**
@@ -114,15 +150,27 @@ export class AppComponent implements OnInit {
         labels: [],
         datasets: [{
           label: 'Total pooled coins',
-          borderColor: 'rgb(3, 232, 176,2)',
+          borderColor: 'rgb(69, 212, 146, 2)',
           borderWidth: 3,
           pointBorderWidth: 4,
           pointBackgroundColor: 'rgb(34, 41, 41,2)',
           pointBorderColor: 'rgba(250, 250, 250,2)',
+	  yAxisID: 'y-coins',
           data: [],
         }, {
-          fill: 'origin',
-          label: 'Total blocks found',
+            label: 'Total blocks found',
+	    fill: false,
+	    pointStyle: 'rect',
+	    borderJoinStyle: 'round',
+	    lineTension: 0,
+	    stepped: false,
+	    borderDash: [ 5, 5 ],
+            borderColor: 'rgb(69, 212, 146, 2)',
+          borderWidth: 3,
+          pointBorderWidth: 4,
+          pointBackgroundColor: 'rgb(34, 41, 41,2)',
+          pointBorderColor: 'rgba(250, 250, 250,2)',
+	  yAxisID: 'y-blocks',
           data: [],
         }]
       },
@@ -130,7 +178,8 @@ export class AppComponent implements OnInit {
         responsive: true,
         title: {
           display: true,
-          text: ''
+          text: 'Pooled Coins/Found Blocks',
+          fontColor: '#CCC'
         },
         tooltips: {
           mode: 'index',
@@ -161,10 +210,11 @@ export class AppComponent implements OnInit {
             },
           }],
           yAxes: [{
-            stacked: true,
+            stacked: false,
+	    id: 'y-coins',
             scaleLabel: {
-              display: false,
-              labelString: ''
+              display: true,
+              labelString: 'PART'
             },
             gridLines: {
               display: false
@@ -174,11 +224,237 @@ export class AppComponent implements OnInit {
               fontSize: 14,
               fontFamily: '\'Inter UI\', sans-serif'
             },
+	  },
+	  {
+            stacked: false,
+	    position: 'right',
+		id: 'y-blocks',
+            scaleLabel: {
+              display: true,
+              labelString: 'Blocks'
+            },
+            gridLines: {
+              display: false
+            },
+            ticks: {
+              fontColor: '#CCC',
+              fontSize: 14,
+		fontFamily: '\'Inter UI\', sans-serif',
+		suggestedMax: 15,
+            }
           }]
         }
       }
 
     });
+  }
+
+    createStakingRateHourlyChart(): void {
+	const ctx = this.chartElem1.nativeElement.getContext('2d');
+	this.stakingRateHourlyChart = new Chart(ctx, {
+	    type: 'line',
+	    data: {
+		//        labels: [],
+		datasets: [{
+		    label: 'Average',
+		    borderColor: 'rgb(69, 212, 146, 2)',
+		    borderWidth: 3,
+		    pointBorderWidth: 2,
+		    pointBackgroundColor: 'rgb(34, 41, 41,2)',
+		    pointBorderColor: 'rgba(250, 250, 250,2)',
+		    data: []
+		},
+		{
+		    label: 'Min',
+		    borderColor: 'rgb(69, 212, 146, 2)',
+		    borderWidth: 2,
+		    backgroundColor: 'rgb(80, 80, 80, 2)',
+		    pointRadius: 0,
+		    pointStyle: 'line',
+		    showLine: true,
+		    fill: '+1',
+		    data: []
+		},
+		{
+		    label: 'Max',
+		    borderColor: 'rgb(69, 212, 146, 2)',
+		    borderWidth: 2,
+		    pointRadius: 0,
+		    pointStyle: 'line',
+		    showLine: true,
+		    data: []
+		}]
+	    },
+	    options: {
+		responsive: true,
+		maintainAspectRatio: true,
+		title: {
+		    display: true,
+		    text: 'Hourly Effective Staking Rate',
+		    fontColor: '#CCC',
+		},
+		tooltips: {
+		    mode: 'index',
+		    displayColors: false
+		},
+		hover: {
+		    mode: 'index'
+		},
+		legend: {
+		    display: false,
+		},
+		scales: {
+		    xAxes: [{
+			type: 'time',
+			stacked: true,
+			scaleLabel: {
+			    display: false,
+			    labelString: ''
+			},
+			gridLines: {
+			    display: true,
+			    color: 'rgb(34, 41, 41,2)',
+			    lineWidth: 0.5
+			},
+			ticks: {
+			    source: 'data',
+			    fontColor: '#CCC',
+			    fontSize: 14,
+			    fontFamily: '\'Inter UI\', sans-serif'
+			},
+			time: {
+			    parser: 'XZZ',
+			    unit: 'hour',
+			    tooltipFormat: "HH:mm",
+			    displayFormats: {
+				hour: 'HH'
+			    }
+			}
+		    }],
+		    yAxes: [{
+			stacked: false,
+			scaleLabel: {
+			    display: true,
+			    labelString: '%'
+			},
+			gridLines: {
+			    display: false
+			},
+			ticks: {
+			    min: 0,
+			    fontColor: '#CCC',
+			    fontSize: 14,
+			    fontFamily: '\'Inter UI\', sans-serif'
+			},
+		    }]
+		}
+	    }
+
+	});
+    }
+
+  createStakingRateDailyChart(): void {
+    const ctx = this.chartElem2.nativeElement.getContext('2d');
+      this.stakingRateDailyChart = new Chart(ctx, {
+	    type: 'line',
+	    data: {
+		//        labels: [],
+		datasets: [{
+		    label: 'Average',
+		    borderColor: 'rgb(69, 212, 146, 2)',
+		    borderWidth: 3,
+		    pointBorderWidth: 2,
+		    pointBackgroundColor: 'rgb(34, 41, 41,2)',
+		    pointBorderColor: 'rgba(250, 250, 250,2)',
+		    data: []
+		},
+		{
+		    label: 'Min',
+		    borderColor: 'rgb(69, 212, 146, 2)',
+		    borderWidth: 2,
+		    backgroundColor: 'rgb(80, 80, 80, 2)',
+		    pointRadius: 0,
+		    pointStyle: 'line',
+		    showLine: true,
+		    fill: '+1',
+		    data: []
+		},
+		{
+		    label: 'Max',
+		    borderColor: 'rgb(69, 212, 146, 2)',
+		    borderWidth: 2,
+		    pointRadius: 0,
+		    pointStyle: 'line',
+		    showLine: true,
+		    data: []
+		}]
+	    },
+	    options: {
+		responsive: true,
+		maintainAspectRatio: true,
+		title: {
+		    display: true,
+		    text: 'Daily Effective Staking Rate',
+		    fontColor: '#CCC',
+		},
+		tooltips: {
+		    mode: 'index',
+		    displayColors: false
+		},
+		hover: {
+		    mode: 'index'
+		},
+		legend: {
+		    display: false,
+		},
+		scales: {
+		    xAxes: [{
+			type: 'time',
+			stacked: true,
+			scaleLabel: {
+			    display: false,
+			    labelString: ''
+			},
+			gridLines: {
+			    display: true,
+			    color: 'rgb(34, 41, 41,2)',
+			    lineWidth: 0.5
+			},
+			ticks: {
+			    source: 'data',
+			    fontColor: '#CCC',
+			    fontSize: 14,
+			    fontFamily: '\'Inter UI\', sans-serif'
+			},
+			time: {
+			    parser: 'X',
+			    unit: 'day',
+			    tooltipFormat: "YYYY-MM-DD",
+			    displayFormats: {
+				hour: 'HH'
+			    }
+			}
+		    }],
+		    yAxes: [{
+			stacked: false,
+			scaleLabel: {
+			    display: true,
+			    labelString: '%'
+			},
+			gridLines: {
+			    display: false
+			},
+			ticks: {
+			    min: 0,
+			    fontColor: '#CCC',
+			    fontSize: 14,
+			    fontFamily: '\'Inter UI\', sans-serif'
+			},
+		    }]
+		}
+	    }
+
+	});
   }
 
 
@@ -211,6 +487,10 @@ export class AppComponent implements OnInit {
     return hrMetrics.map(record => record[2]);
   }
 
+  getPoints(data: any, pos) {
+      return data.map(record => { return { t: record[0].toString()+'+00', y: record[pos] } });
+  }
+
 
   getBlockExplorerUrlForBlock(block: string) {
     return `https://explorer${ environment.testnet ?  '-testnet' : ''}.particl.io/block/${block}`;
@@ -219,4 +499,9 @@ export class AppComponent implements OnInit {
   getBlockExplorerUrlForTx(tx: string) {
     return `https://explorer${ environment.testnet ?  '-testnet' : ''}.particl.io/tx/${tx}`;
   }
+
+  getBlockExplorerUrlForAdr(adr: string) {
+    return `https://explorer${ environment.testnet ?  '-testnet' : ''}.particl.io/address/${adr}`;
+  }
+
 }
