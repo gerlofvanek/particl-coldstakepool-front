@@ -5,7 +5,7 @@
             <img src="assets/img/cold-staking-logo.png" class="cold-staking-logo" alt="Cold Staking Logo">
             <div class="item pool-address">
                 <p class="text-lead">
-                    <span class="green">PARTICL</span> COLD STAKING POOL
+                    <span class="green"><b>PARTICL</b></span> COLD STAKING POOL
                 </p>
 
                 <ngx-qrcode
@@ -31,10 +31,10 @@
         <form>
             <input id="charts_tab1" type="radio" name="chart_tabs" checked />
             <label for="charts_tab1">POOLED COINS</label>
-            <input id="charts_tab2" type="radio" name="chart_tabs" />
+        <!--    <input id="charts_tab2" type="radio" name="chart_tabs" />
             <label for="charts_tab2">HOURLY STAKING RATE</label>
             <input id="charts_tab3" type="radio" name="chart_tabs" />
-            <label for="charts_tab3">DAILY STAKING RATE</label>
+            <label for="charts_tab3">DAILY STAKING RATE</label> -->
             <div class="hide" id="charts_tab1_content">
 	      <!-- chart -->
 	      <section class="chart">
@@ -65,9 +65,8 @@
 	</form>
     </div>
 </div>
+
 <hr>
-
-
 <hr>
 
 <section class="intro-details">
@@ -102,11 +101,11 @@
             <div class="amount">{{api.lastpaymentrunheight | number}}</div>
             <p class="desc ">Latest reward distribution</p>
         </div>
-        <div class="item">
+<!--     <div class="item">
             <h3 class="title">Staking Interest Rate </h3>
             <div class="amount">{{(pdstat.actual_rate*1.0).toFixed(2) | number }}%</div>
             <p class="desc ">Effective staking interest rate averaged over last 100 blocks</p>
-        </div>
+        </div> -->
   <!--      <div class="item">
             <h3 class="title">Marketplace Fee Vote </h3>
             <div class="amount">{{pdstat.smsg_fee_rate_target | number:'1.0-8'}}
@@ -135,8 +134,8 @@
             <input id="tab4" type="radio" name="tabs" />
             <label for="tab4">LATEST PAYMENTS</label>
 
-            <input id="tab5" type="radio" name="tabs" />
-            <label for="tab5">PARTICL NODE STATUS</label>
+        <!--<input id="tab5" type="radio" name="tabs" />
+            <label for="tab5">PARTICL NODE STATUS</label> -->
 
             <div class="hide" id="content1">
                 <table class="table text-left">
